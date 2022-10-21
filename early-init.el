@@ -1,7 +1,7 @@
 ;;; early-init.el --- early bird  -*- no-byte-compile: t -*-
 (setq package-enable-at-startup nil)
 (setq load-prefer-newer t)
-(dolist (dir '( "lib/packed" "lib/auto-compile" ))
+(dolist (dir '( "lib/packed" "lib/auto-compile" "lib/compat" ))
   (add-to-list 'load-path (expand-file-name dir user-emacs-directory)))
 (require 'auto-compile)
 (auto-compile-on-load-mode)

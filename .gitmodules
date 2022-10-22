@@ -23,6 +23,12 @@
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
+[submodule "leaf"]
+	path = lib/leaf
+	url = git@github.com:conao3/leaf.el.git
+[submodule "leaf-keywords"]
+	path = lib/leaf-keywords
+	url = git@github.com:conao3/leaf-keywords.el.git
 [submodule "libgit"]
 	path = lib/libgit
 	url = git@github.com:magit/libegit2.git

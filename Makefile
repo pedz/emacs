@@ -1,9 +1,6 @@
 .DEFAULT_GOAL := all
 DRONES_DIR = $(shell git config "borg.drones-directory" || echo "lib")
 
-# Comment this out or make it more intelligent for non-Mac platforms.
-EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs
-
 all: clean build
 
 -include $(DRONES_DIR)/borg/borg.mk

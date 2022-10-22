@@ -10,19 +10,23 @@
 [submodule "compat"]
 	path = lib/compat
 	url = https://git.sr.ht/~pkal/compat
+	ignore = untracked
 [submodule "dash"]
 	path = lib/dash
 	url = git@github.com:magnars/dash.el.git
+	ignore = untracked
 [submodule "emacsql"]
 	path = lib/emacsql
 	url = git@github.com:skeeto/emacsql.git
 	no-byte-compile = emacsql-pg.el
+	ignore = untracked
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
 [submodule "libgit"]
 	path = lib/libgit
 	url = git@github.com:magit/libegit2.git
+	ignore = untracked
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git

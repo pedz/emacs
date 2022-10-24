@@ -87,6 +87,10 @@
 	path = lib/rake
 	url = git@github.com:asok/rake.git
 	ignore = untracked
+[submodule "rbenv"]
+	path = lib/rbenv
+	url = git@github.com:senny/rbenv.el.git
+	ignore = untracked
 [submodule "s"]
 	path = lib/s
 	url = git@github.com:magnars/s.el.git

@@ -132,15 +132,13 @@ There are some things that do not like line breaks so I use this to do
 the opposive of [[elisp:(describe-function 'fill-region)][fill-region]].
 
 #+begin_src emacs-lisp
-  ;;; The compiler tells me:
-  ;;; Warning (bytecomp): ‘replace-regexp’ is for interactive use only; use ‘re-search-forward’ and ‘replace-match’ instead.
-  ;;; so I'll leave this out until I have time to fix it.
-  ;; (defun unfill ()
-  ;;   "Does the opposite of fill.  Lines separated with a single new line
-  ;;   are joined with a single space."
-  ;;   (interactive)
-  ;;   (replace-regexp "\\(.\\)\n\\(.\\)" "\\1 \\2"))
-  
+  (defun unfill ()
+    "Does the opposite of fill.  Lines separated with a single new line
+    are joined with a single space."
+    (interactive)
+    (while (re-search-forward "\\(.\\)\n\\(.\\)" nil t)
+      (replace-match "\\1 \\2")))
+
   ;;; Set Mac type default
   (global-set-key "\M-`" 'other-frame)
 #+end_src

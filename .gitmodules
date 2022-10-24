@@ -1,15 +1,19 @@
 [submodule "async"]
 	path = lib/async
 	url = git@github.com:jwiegley/emacs-async.git
+	ignore = untracked
 [submodule "auto-compile"]
 	path = lib/auto-compile
 	url = git@github.com:emacscollective/auto-compile.git
+	ignore = untracked
 [submodule "borg"]
 	path = lib/borg
 	url = git@github.com:emacscollective/borg.git
+	ignore = untracked
 [submodule "closql"]
 	path = lib/closql
 	url = git@github.com:emacscollective/closql.git
+	ignore = untracked
 [submodule "compat"]
 	path = lib/compat
 	url = https://git.sr.ht/~pkal/compat
@@ -26,27 +30,35 @@
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
+	ignore = untracked
 [submodule "f"]
 	path = lib/f
 	url = git@github.com:rejeep/f.el.git
+	ignore = untracked
 [submodule "findr"]
 	path = lib/findr
 	url = git@github.com:emacsorphanage/findr.git
+	ignore = untracked
 [submodule "helm"]
 	path = lib/helm
 	url = git@github.com:emacs-helm/helm.git
+	ignore = untracked
 [submodule "inf-ruby"]
 	path = lib/inf-ruby
 	url = git@github.com:nonsequitur/inf-ruby.git
+	ignore = untracked
 [submodule "jump"]
 	path = lib/jump
 	url = git@github.com:eschulte/jump.el.git
+	ignore = untracked
 [submodule "leaf"]
 	path = lib/leaf
 	url = git@github.com:conao3/leaf.el.git
+	ignore = untracked
 [submodule "leaf-keywords"]
 	path = lib/leaf-keywords
 	url = git@github.com:conao3/leaf-keywords.el.git
+	ignore = untracked
 [submodule "libgit"]
 	path = lib/libgit
 	url = git@github.com:magit/libegit2.git
@@ -54,21 +66,28 @@
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git
+	ignore = untracked
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
+	ignore = untracked
 [submodule "projectile"]
 	path = lib/projectile
 	url = git@github.com:bbatsov/projectile.git
+	ignore = untracked
 [submodule "projectile-rails"]
 	path = lib/projectile-rails
 	url = git@github.com:asok/projectile-rails.git
+	ignore = untracked
 [submodule "rake"]
 	path = lib/rake
 	url = git@github.com:asok/rake.git
+	ignore = untracked
 [submodule "s"]
 	path = lib/s
 	url = git@github.com:magnars/s.el.git
+	ignore = untracked
 [submodule "with-editor"]
 	path = lib/with-editor
 	url = git@github.com:magit/with-editor.git
+	ignore = untracked

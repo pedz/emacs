@@ -26,9 +26,21 @@
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
+[submodule "f"]
+	path = lib/f
+	url = git@github.com:rejeep/f.el.git
+[submodule "findr"]
+	path = lib/findr
+	url = git@github.com:emacsorphanage/findr.git
 [submodule "helm"]
 	path = lib/helm
 	url = git@github.com:emacs-helm/helm.git
+[submodule "inf-ruby"]
+	path = lib/inf-ruby
+	url = git@github.com:nonsequitur/inf-ruby.git
+[submodule "jump"]
+	path = lib/jump
+	url = git@github.com:eschulte/jump.el.git
 [submodule "leaf"]
 	path = lib/leaf
 	url = git@github.com:conao3/leaf.el.git
@@ -45,6 +57,18 @@
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
+[submodule "projectile"]
+	path = lib/projectile
+	url = git@github.com:bbatsov/projectile.git
+[submodule "projectile-rails"]
+	path = lib/projectile-rails
+	url = git@github.com:asok/projectile-rails.git
+[submodule "rake"]
+	path = lib/rake
+	url = git@github.com:asok/rake.git
+[submodule "s"]
+	path = lib/s
+	url = git@github.com:magnars/s.el.git
 [submodule "with-editor"]
 	path = lib/with-editor
 	url = git@github.com:magit/with-editor.git

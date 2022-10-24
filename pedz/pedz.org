@@ -192,15 +192,24 @@ maintainable.  Note, there are exceptions.  I set tramp-remote-path to
                        "remote-shell" "/usr/bin/zsh")))
 #+end_src
 
+** Pull in other files
+
+#+begin_src emacs-lisp
+  (pedz/org-require 'helm-setup)
+#+end_src
+
 #+begin_src emacs-lisp :tangle no
   ;; (eval-when-compile (add-to-list 'load-path (expand-file-name ".")))
-  (require 'helm-setup)
   (require 'projectile-setup)
   (require 'ruby-setup)
   (require 'resize)
 #+end_src
 
 * Code and settings no longer in use
+:PROPERTIES:
+:VISIBILITY: folded
+:END:
+
 ** minibuffer keymap modifications
 
 Currently this code is not included in the tangle output.  It makes

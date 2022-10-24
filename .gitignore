@@ -1,2 +1,6 @@
-/epkgs/
 *.elc
+/auto-save-list
+/backup
+/epkgs/
+/init.el
+/transient

@@ -43,6 +43,9 @@
 	path = lib/helm
 	url = git@github.com:emacs-helm/helm.git
 	ignore = untracked
+[submodule "helm-projectile"]
+	path = lib/helm-projectile
+	url = git@github.com:bbatsov/helm-projectile.git
 [submodule "inf-ruby"]
 	path = lib/inf-ruby
 	url = git@github.com:nonsequitur/inf-ruby.git

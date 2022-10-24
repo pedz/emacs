@@ -1,0 +1,24 @@
+#+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
+#+STARTUP: content
+#+TITLE:  projectile and projectile-rails setup
+#+AUTHOR: Perry Smith
+#+EMAIL:  pedz@easesoftware.com
+
+#+begin_src emacs-lisp
+  (leaf projectile
+    :defvar projectile-mode-map
+    :defun helm-projectile-on
+    :require projectile helm-projectile
+    :defer-config
+    (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+    :config
+    (projectile-mode +1)
+    (helm-projectile-on))
+
+  (leaf projectile-rails
+    :defvar projectile-rails-mode-map
+    :defer-config
+    (define-key projectile-rails-mode-map (kbd "s-r") 'projectile-rails-command-map))
+
+  (provide 'projectile-setup)
+#+end_src

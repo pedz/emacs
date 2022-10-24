@@ -198,11 +198,11 @@ maintainable.  Note, there are exceptions.  I set tramp-remote-path to
 #+begin_src emacs-lisp
   (pedz/org-require 'helm-setup)
   (pedz/org-require 'resize)
+  (pedz/org-require 'projectile-setup)
 #+end_src
 
 #+begin_src emacs-lisp :tangle no
   ;; (eval-when-compile (add-to-list 'load-path (expand-file-name ".")))
-  (require 'projectile-setup)
   (require 'ruby-setup)
 #+end_src
 

@@ -1,5 +1,8 @@
 #+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
 #+STARTUP: content
+#+TITLE:  More Emacs Initialization
+#+AUTHOR: Perry Smith
+#+EMAIL:  pedz@easesoftware.com
 
 * Code and settings currently in use
 ** Small tweaks
@@ -194,13 +197,13 @@ maintainable.  Note, there are exceptions.  I set tramp-remote-path to
 
 #+begin_src emacs-lisp
   (pedz/org-require 'helm-setup)
+  (pedz/org-require 'resize)
 #+end_src
 
 #+begin_src emacs-lisp :tangle no
   ;; (eval-when-compile (add-to-list 'load-path (expand-file-name ".")))
   (require 'projectile-setup)
   (require 'ruby-setup)
-  (require 'resize)
 #+end_src
 
 * Code and settings no longer in use

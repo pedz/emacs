@@ -65,7 +65,14 @@ nothing to do but just as a placeholder:
 [[https://microsoft.github.io/language-server-protocol/][Language Server Protocol]] (LSP) originated in Microsoft's Visual Studio
 Code and has since become an open standard.  The idea is to have a
 "Language Server" that understands the language separate from the
-editor.  [[https://emacs-lsp.github.io/lsp-mode/][emacs-lsp/lsp-mode]] is the piece inside Emacs that talks to
+editor.
+
+I might need to spin all of the LSP stuff off into its own separate
+file but for now, I'll just add them here.
+
+** lsp-mode
+
+[[https://emacs-lsp.github.io/lsp-mode/][emacs-lsp/lsp-mode]] is the piece inside Emacs that talks to
 the language server.  The only place I've used it so far is with Ruby
 and the language server I'm using is called [[https://solargraph.org][Solargraph]].  To make
 matters harder, I'm using it with the Ruby code as well as Solargraph
@@ -83,6 +90,20 @@ The instructions for installing lsp-mode for
     (when (fboundp #'lsp-deferred)
       (add-to-list 'load-path (expand-file-name "lib/lsp-mode/clients" user-emacs-directory))
       (add-hook 'enh-ruby-mode-hook #'lsp-deferred)))
+#+end_src
+
+** helm-lsp
+
+When setting up LSP, it said it can not configure ~company-mode~
+because I have not installed it yet.  I thought I would see if it
+could use helm instead so I found the [[https://github.com/emacs-lsp/helm-lsp][helm-lsp]] package but it only
+hooks in to one key.  But I'll keep it anyway.
+
+#+begin_src emacs-lisp
+  (leaf helm-lsp
+    :config
+    (when (and (fboundp #'lsp-deferred) (fboundp #'helm-lsp-workspace-symbol))
+      (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol)))
 #+end_src
 
 * yari

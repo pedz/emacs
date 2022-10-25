@@ -67,6 +67,10 @@
 	path = lib/helm
 	url = git@github.com:emacs-helm/helm.git
 	ignore = untracked
+[submodule "helm-lsp"]
+	path = lib/helm-lsp
+	url = git@github.com:emacs-lsp/helm-lsp.git
+	ignore = untracked
 [submodule "helm-projectile"]
 	path = lib/helm-projectile
 	url = git@github.com:bbatsov/helm-projectile.git

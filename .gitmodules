@@ -1,3 +1,6 @@
+[submodule "aio"]
+	path = lib/aio
+	url = git@github.com:skeeto/emacs-aio.git
 [submodule "async"]
 	path = lib/async
 	url = git@github.com:jwiegley/emacs-async.git
@@ -22,11 +25,26 @@
 	path = lib/dash
 	url = git@github.com:magnars/dash.el.git
 	ignore = untracked
+[submodule "docker"]
+	path = lib/docker
+	url = git@github.com:Silex/docker.el.git
+[submodule "docker-tramp"]
+	path = lib/docker-tramp
+	url = git@github.com:emacs-pe/docker-tramp.el.git
+[submodule "dockerfile-mode"]
+	path = lib/dockerfile-mode
+	url = git@github.com:spotify/dockerfile-mode.git
+[submodule "elfeed"]
+	path = lib/elfeed
+	url = git@github.com:skeeto/elfeed.git
 [submodule "emacsql"]
 	path = lib/emacsql
 	url = git@github.com:skeeto/emacsql.git
 	no-byte-compile = emacsql-pg.el
 	ignore = untracked
+[submodule "enh-ruby-mode"]
+	path = lib/enh-ruby-mode
+	url = git@github.com:zenspider/enhanced-ruby-mode.git
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
@@ -47,10 +65,19 @@
 	path = lib/helm-projectile
 	url = git@github.com:bbatsov/helm-projectile.git
 	ignore = untracked
+[submodule "ht"]
+	path = lib/ht
+	url = git@github.com:Wilfred/ht.el.git
+[submodule "hydra"]
+	path = lib/hydra
+	url = git@github.com:abo-abo/hydra.git
 [submodule "inf-ruby"]
 	path = lib/inf-ruby
 	url = git@github.com:nonsequitur/inf-ruby.git
 	ignore = untracked
+[submodule "js2-mode"]
+	path = lib/js2-mode
+	url = git@github.com:mooz/js2-mode.git
 [submodule "jump"]
 	path = lib/jump
 	url = git@github.com:eschulte/jump.el.git
@@ -67,10 +94,19 @@
 	path = lib/libgit
 	url = git@github.com:magit/libegit2.git
 	ignore = untracked
+[submodule "lsp-docker"]
+	path = lib/lsp-docker
+	url = git@github.com:emacs-lsp/lsp-docker.git
+[submodule "lsp-mode"]
+	path = lib/lsp-mode
+	url = git@github.com:emacs-lsp/lsp-mode.git
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git
 	ignore = untracked
+[submodule "markdown-mode"]
+	path = lib/markdown-mode
+	url = git@github.com:jrblevin/markdown-mode.git
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
@@ -91,11 +127,29 @@
 	path = lib/rbenv
 	url = git@github.com:senny/rbenv.el.git
 	ignore = untracked
+[submodule "rubocop"]
+	path = lib/rubocop
+	url = git@github.com:rubocop/rubocop-emacs.git
 [submodule "s"]
 	path = lib/s
 	url = git@github.com:magnars/s.el.git
 	ignore = untracked
+[submodule "simple-httpd"]
+	path = lib/simple-httpd
+	url = git@github.com:skeeto/emacs-web-server.git
+[submodule "skewer-mode"]
+	path = lib/skewer-mode
+	url = git@github.com:skeeto/skewer-mode.git
+[submodule "spinner"]
+	path = lib/spinner
+	url = git@github.com:Malabarba/spinner.el.git
+[submodule "tablist"]
+	path = lib/tablist
+	url = git@github.com:politza/tablist.git
 [submodule "with-editor"]
 	path = lib/with-editor
 	url = git@github.com:magit/with-editor.git
 	ignore = untracked
+[submodule "yaml"]
+	path = lib/yaml
+	url = git@github.com:zkry/yaml.el.git

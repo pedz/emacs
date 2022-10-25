@@ -12,6 +12,8 @@ be some useful nuggets in there so... why not?
 
 #+begin_src emacs-lisp
   (leaf helm
+    :custom
+    (helm-command-prefix-key . "C-c h")
     :require helm helm-config
     :init 
     (global-set-key (kbd "M-x") 'helm-M-x)

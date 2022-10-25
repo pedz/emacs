@@ -1,0 +1,93 @@
+#+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
+#+STRTUP: content
+#+TITLE:  Emacs Ruby setup
+#+AUTHOR: Perry Smith
+#+EMAIL:  pedz@easesoftware.com
+
+* Set up enh-ruby-mode
+
+My belief is that the way ~leaf~ works is it does not actually check
+to see if anything is available because I am not adding ~:ensure~ nor
+~:require~ in most stanzas.  So, if I decide to remove a package or a
+package is not available I want the init process to complete.  Perhaps
+give me a warning message that =foo package is not available=.
+
+~borg~ sets the load-path as well as loading any autoloads so I can
+check the presence of a package by asking if symbols are bound.
+
+#+begin_src emacs-lisp
+  (leaf enh-ruby-mode
+    :config
+    (when (fboundp #'enh-ruby-mode)
+      (add-to-list 'auto-mode-alist
+                   '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
+      (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))))
+#+end_src
+
+* Set up rbenv
+
+[[https://github.com/senny/rbenv.el][rbenv]] causes Emacs to use the correct version of Ruby.
+
+#+begin_src emacs-lisp
+  (leaf rbenv
+    :custom
+    (rbenv-installation-dir . "~/.config/rbenv")
+    :config
+    (when (fboundp #'global-rbenv-mode)
+      (add-hook 'enh-ruby-mode-hook #'global-rbenv-mode)))
+#+end_src
+
+* Rubocop-mode
+
+[[https://github.com/rubocop/rubocop-emacs][Rubocop]] pesters you to write nice beautiful code.
+
+#+begin_src emacs-lisp
+  (leaf rubocop
+    :defvar rubocop-mode-map
+    :defer-config
+    (define-key rubocop-mode-map (kbd "s-c") 'rubocop-command-map)
+    :config
+    (when (fboundp #'rubocop-mode)
+      (add-hook 'enh-ruby-mode-hook #'rubocop-mode)))
+#+end_src
+
+* LSP
+
+[[https://microsoft.github.io/language-server-protocol/][Language Server Protocol]] (LSP) originated in Microsoft's Visual Studio
+Code and has since become an open standard.  The idea is to have a
+"Language Server" that understands the language separate from the
+editor.  [[https://emacs-lsp.github.io/lsp-mode/][emacs-lsp]] is the piece inside Emacs that talks to the
+language server.  The only place I've used it so far is with Ruby and
+the language server I'm using is called [[https://solargraph.org][Solargraph]].  To make matters
+harder, I'm using it with the Ruby code as well as Solargraph in a
+Docker container.
+
+#+begin_src emacs-lisp
+  (leaf lsp-mode
+    :defer-config
+    (require 'lsp-docker-start)
+    :config
+    (when (fboundp #'lsp-deferred)
+      (add-hook 'enh-ruby-mode-hook #'lsp-deferred)))
+#+end_src
+
+* yari
+
+#+begin_src emacs-lisp :tangle no
+  ;; Put yari on s-y
+  (global-set-key (kbd "s-y") 'yari)
+
+#+end_src
+
+*  web-mode
+
+#+begin_src emacs-lisp :tangle no
+  ;; Try out web-mode for erb Rails templates
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+#+end_src
+
+* Provide ruby-setup
+
+#+begin_src emacs-lisp
+  (provide 'ruby-setup)
+#+end_src

@@ -156,6 +156,10 @@ Currently I have things split up into separate files all loaded by
 #+begin_src emacs-lisp
   (eval-and-compile
     (add-to-list 'load-path (expand-file-name "pedz" user-emacs-directory)))
+  ;; See https://github.com/emacscollective/borg/discussions/135#discussioncomment-3954786
+  ;; (declare-function pedz/org-require "early-init" (sym &optional dont-load paths))
+  (eval-when-compile
+    (defun pedz/org-require (sym &optional dont-load paths)))
   (pedz/org-require 'pedz)
 #+end_src
 

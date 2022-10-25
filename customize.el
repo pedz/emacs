@@ -44,7 +44,6 @@
  '(explicit-zsh-args '("-l" "-i" "+Z"))
  '(feature-cucumber-command "cucumber {options} \"{feature}\"")
  '(grep-find-ignored-directories (append vc-directory-exclusion-list (list ".bundle")))
- '(helm-command-prefix-key "C-c h")
  '(ignored-local-variable-values
    '((checkdoc-package-keywords-flag)
      (eshell-path-env . "/hatred/bin:/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin")))

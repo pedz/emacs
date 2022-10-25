@@ -139,6 +139,10 @@
 	path = lib/rbenv
 	url = git@github.com:senny/rbenv.el.git
 	ignore = untracked
+[submodule "rspec-mode"]
+	path = lib/rspec-mode
+	url = git@github.com:pezra/rspec-mode.git
+	ignore = untracked
 [submodule "rubocop"]
 	path = lib/rubocop
 	url = git@github.com:rubocop/rubocop-emacs.git

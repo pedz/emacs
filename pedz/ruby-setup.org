@@ -65,11 +65,15 @@ nothing to do but just as a placeholder:
 [[https://microsoft.github.io/language-server-protocol/][Language Server Protocol]] (LSP) originated in Microsoft's Visual Studio
 Code and has since become an open standard.  The idea is to have a
 "Language Server" that understands the language separate from the
-editor.  [[https://emacs-lsp.github.io/lsp-mode/][emacs-lsp]] is the piece inside Emacs that talks to the
-language server.  The only place I've used it so far is with Ruby and
-the language server I'm using is called [[https://solargraph.org][Solargraph]].  To make matters
-harder, I'm using it with the Ruby code as well as Solargraph in a
-Docker container.
+editor.  [[https://emacs-lsp.github.io/lsp-mode/][emacs-lsp/lsp-mode]] is the piece inside Emacs that talks to
+the language server.  The only place I've used it so far is with Ruby
+and the language server I'm using is called [[https://solargraph.org][Solargraph]].  To make
+matters harder, I'm using it with the Ruby code as well as Solargraph
+in a Docker container.
+
+The instructions for installing lsp-mode for
+[[https://emacs-lsp.github.io/lsp-mode/page/installation/#vanilla-emacs][Vanilla Emacs]] does not mention to add the "clients" sub-directory to
+[[elisp:(describe-variable 'load-path)][load-path]].  If you don't, [[elisp:(describe-variable 'lsp-clients)][lsp-clients]] is empty and things don't work.
 
 #+begin_src emacs-lisp
   (leaf lsp-mode
@@ -77,6 +81,7 @@ Docker container.
     (require 'lsp-docker-start)
     :config
     (when (fboundp #'lsp-deferred)
+      (add-to-list 'load-path (expand-file-name "lib/lsp-mode/clients" user-emacs-directory))
       (add-hook 'enh-ruby-mode-hook #'lsp-deferred)))
 #+end_src
 
@@ -85,7 +90,6 @@ Docker container.
 #+begin_src emacs-lisp :tangle no
   ;; Put yari on s-y
   (global-set-key (kbd "s-y") 'yari)
-
 #+end_src
 
 *  web-mode

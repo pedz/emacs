@@ -3,7 +3,7 @@
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 
-There are some routines I wrote to help with automatically or
+These are some routines I wrote to help with automatically or
 semi-automatically resizing Emacs' frames.  The main entry point is 
 [[defun my-position-frame (][my-position-frame]].
 

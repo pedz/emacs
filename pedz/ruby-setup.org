@@ -88,8 +88,7 @@ The instructions for installing lsp-mode for
     (require 'lsp-docker-start)
     :config
     (when (fboundp #'lsp-deferred)
-      (add-to-list 'load-path (expand-file-name "lib/lsp-mode/clients" user-emacs-directory))
-      (add-hook 'enh-ruby-mode-hook #'lsp-deferred)))
+      (add-to-list 'load-path (expand-file-name "lib/lsp-mode/clients" user-emacs-directory))))
 #+end_src
 
 ** helm-lsp

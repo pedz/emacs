@@ -1,0 +1,14 @@
+#+TITLE:  Emacs Initialization Files
+#+AUTHOR: Perry Smith
+#+EMAIL:  pedz@easesoftware.com
+
+* Emacs Configuration
+
+This is my new Emacs configuration based upon [[https://en.wikipedia.org/wiki/Literate_programming][Literate Programming]]
+techniques using [[https://orgmode.org][Org Mode]] formatting.
+
+I am now using [[https://github.com/emacscollective/borg/blob/master/borg.el][borg]] instead of ~el-get~ for my package manager and
+[[https://elpa.gnu.org/packages/leaf.html][leaf]] for package configuration.
+
+I've kept a lot of my old crap in either code that is not tangled or
+stuffed away in the ~old~ directory.

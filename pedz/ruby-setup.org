@@ -101,23 +101,79 @@ hooks in to one key.  But I'll keep it anyway.
 
 #+begin_src emacs-lisp
   (leaf helm-lsp
+    :defvar lsp-mode-map
     :config
     (when (and (fboundp #'lsp-deferred) (fboundp #'helm-lsp-workspace-symbol))
-      (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol)))
+      (eval-after-load 'lsp-mode
+        '(define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol))))
+#+end_src
+
+* company
+
+I don't know how to pronounce this since it stands for COMPlete ANY.
+It was introduced to me via [[lsp-mode]] but it seems to be a big Emacs
+subculture with about 30 packages tying back into it.
+
+[[http://company-mode.github.io][company]] is often referred to as just ~company-mode~.  It is the main
+mode.  I currently have it enabled everywhere -- not just in the
+[[lsp-mode]] buffers.
+
+#+begin_src emacs-lisp
+  (leaf company
+    :defun global-company-mode
+    :require t
+    :config
+    (global-company-mode))
+#+end_src
+
+** company-inf-ruby
+
+[[https://github.com/company-mode/company-inf-ruby/tree/9c2eab3bb82e8838c54013026e6ffb51cccbd37e][company-inf-ruby]] allows company-mode completion back-end for inf-ruby
+buffers.
+
+#+begin_src emacs-lisp
+  (leaf company-inf-ruby
+    :defvar company-backends
+    :defun company-inf-ruby
+    :config
+    (when (and (fboundp #'company-inf-ruby) (fboundp #'inf-ruby))
+      (eval-after-load 'company
+        '(add-to-list 'company-backends #'company-inf-ruby))))
+#+end_src
+
+** helm-company
+
+[[https://github.com/Sodel-the-Vociferous/helm-company/tree/6eb5c2d730a60e394e005b47c1db018697094dde][helm-company]] is Helm interface for company-mode.
+
+#+begin_src emacs-lisp
+  (leaf helm-company
+    :defvar company-mode-map company-active-map
+    :config
+    (when (fboundp #'helm-company)
+      (eval-after-load 'company
+        '(progn
+           (define-key company-mode-map (kbd "C-:") 'helm-company)
+           (define-key company-active-map (kbd "C-:") 'helm-company)))))
 #+end_src
 
 * yari
 
-#+begin_src emacs-lisp :tangle no
-  ;; Put yari on s-y
-  (global-set-key (kbd "s-y") 'yari)
+[[https://github.com/hron/yari.el/tree/a2cb9656ee5dfe1fc2ee3854f3079a1c8e85dbe9][yari]] stands for "Yet Another Ruby Interactive Reference
+
+#+begin_src emacs-lisp
+  (leaf yari
+    :config
+    (global-set-key (kbd "s-y") 'yari))
 #+end_src
 
 *  web-mode
 
+[[https://github.com/fxbois/web-mode/tree/4b8a695825fda366927894e498421f35fce1cbb9][web-mode]] is a major mode for editing web templates
+
 #+begin_src emacs-lisp :tangle no
-  ;; Try out web-mode for erb Rails templates
-  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (leaf web-mode
+    :config
+    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode)))
 #+end_src
 
 * Provide ruby-setup

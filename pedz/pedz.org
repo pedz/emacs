@@ -1,10 +1,12 @@
-#+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
 #+STARTUP: content
 #+TITLE:  More Emacs Initialization
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 
 * Code and settings currently in use
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 ** Small tweaks
 
 Emacs disables a few commands so that new users do not get hopelessly
@@ -97,12 +99,6 @@ now.
 
 #+begin_src emacs-lisp
   (server-start)
-#+end_src
-
-** Enable displaying the time in the mode lines
-
-#+begin_src emacs-lisp
-  (display-time)
 #+end_src
 
 ** Quicker point to register / register to point key bindings
@@ -205,6 +201,7 @@ maintainable.  Note, there are exceptions.  I set tramp-remote-path to
 * Code and settings no longer in use
 :PROPERTIES:
 :VISIBILITY: folded
+:header-args: emacs-lisp :tangle no
 :END:
 
 ** minibuffer keymap modifications
@@ -214,7 +211,7 @@ the minibuffer act more like a Unix TTY with ~C-w~ killing a word and
 ~C-u~ killing the line typed thus far.  I got away from this I believe
 when I started using helm but I honestly don't remember.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (defun pedz/backward-kill-line ()
     "Kills the line from point back to the beginning of the line"
     (interactive)
@@ -248,7 +245,7 @@ anywhere.
 As best I recall right now, x-stuff had other goodies (see below) and
 it tried to resize the initial frame among other things.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (declare-function setup-x "x-stuff" ())
   (defun pedz-frame-hook ()
     (interactive)
@@ -266,7 +263,7 @@ I use to have it so that new frames, including the initial frame,
 would have a random pastel background color.  I did this with xterm as
 well.  Ahhhh... the fun I use to have.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   ;;;
   ;;; Use to be part of x-stuff.el but I just removed the file and put
   ;;; what was useful here.
@@ -307,7 +304,7 @@ such as one on a Mac laptop.
 What this did was hooked hide and hide others back up to the command-h
 and shift-command-h keys.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (if (eq window-system 'ns)
       (progn
         (define-key global-map [?\M-h] 'ns-do-hide-emacs)
@@ -322,7 +319,7 @@ tries to re-implement the Unix find command but I've discovered that
 Helm and other tools work better.  Plus, zsh's ~**~ pattern is so fast
 that I rarely need to use find.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (defun unix-find ( dir &optional filter dont-add-self)
     "Acts similar to the unix find command.  Starting from DIR,
       recursively descends the file system calling FILTER.  Returns a list
@@ -389,7 +386,7 @@ Rails, this might be useful -- although, if I'm sitting at the top of
 a Rails directory structure, I don't see it omitting a high percentage
 of files so what's the point?
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (eval-when-compile (defvar grep-files-aliases))
   (eval-after-load 'grep
     '(add-to-list 'grep-files-aliases (cons "rails" "*.rb *.erb *.js *.css *.scss")))
@@ -401,7 +398,7 @@ within a frame.  I never go use to these and so they are not active
 currently.  I'm also trying to use tabs now instead of multiple
 windows.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (windmove-default-keybindings)
 #+end_src
 ** Snapper hooks
@@ -413,7 +410,7 @@ Glorious days.  But... long past.
 Anyhow, it would put out colored lines so I hooked this up so that I
 could see the colors within Emacs.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (defun display-ansi-colors ()
     (interactive)
     (require 'ansi-color)
@@ -424,7 +421,7 @@ could see the colors within Emacs.
 [[https://doxymacs.sourceforge.net][Doxymacs]] appears to be an integration of Doxegen and Emacs but I don't
 think I've used this since the SATA project back in 2006.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (if (file-directory-p "/usr/local/share/emacs/site-lisp")
       (progn
         (declare-function doxymacs-mode "doxymacs"  (&optional arg))
@@ -462,7 +459,7 @@ requests to impliment the same concept in the existing Cocoa
 (a.k.a. NextStep) framework.  I'll leave this here for historical
 reference.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (require 'url)
 
   (if (and
@@ -503,7 +500,7 @@ well as screen out unwanted results so I developed these functions to
 add and delete patterns from [[elisp:(describe-variable 'grep-find-ignored-files)][grep-find-ignored-files]] and [[elisp:(describe-variable
  'grep-find-ignored-directories)][grep-find-ignored-directories]].
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (defun rgrep-exclude-log-files ()
     "Add *.log to `grep-find-ignored-files'"
     (interactive)
@@ -551,7 +548,7 @@ can be customized.  I used the code below at State Street to customize
 the list.  I no longer use it but kept it for possible future
 reference.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   ;;; These are two variables I customized
   '(magit-repolist-columns
     '(("Name" 42 magit-repolist-column-ident nil)
@@ -600,7 +597,16 @@ reference.
                     'keymap map))))
 #+end_src
 
+** Enable displaying the time in the mode lines
+
+#+begin_src emacs-lisp
+  (display-time)
+#+end_src
+
 * Provide pedz
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 #+begin_src emacs-lisp
   (provide 'pedz)
 #+end_src

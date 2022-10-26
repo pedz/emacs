@@ -183,6 +183,10 @@
 	path = lib/tablist
 	url = git@github.com:politza/tablist.git
 	ignore = untracked
+[submodule "web-mode"]
+	path = lib/web-mode
+	url = git@github.com:fxbois/web-mode.git
+	ignore = untracked
 [submodule "with-editor"]
 	path = lib/with-editor
 	url = git@github.com:magit/with-editor.git
@@ -190,4 +194,8 @@
 [submodule "yaml"]
 	path = lib/yaml
 	url = git@github.com:zkry/yaml.el.git
+	ignore = untracked
+[submodule "yari"]
+	path = lib/yari
+	url = git@github.com:hron/yari.el.git
 	ignore = untracked

@@ -103,7 +103,9 @@
  '(rspec-use-rake-flag nil)
  '(rspec-use-rake-when-possible nil)
  '(safe-local-variable-values
-   '((eval lsp t)
+   '((eval hatred-dir-local-setup)
+     (eval lsp-deferred)
+     (eval lsp t)
      (rspec-use-bundler-when-possible)
      (rspec-use-docker-when-possible . t)
      (rspec-docker-cwd . "/hatred/")

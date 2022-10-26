@@ -4,6 +4,12 @@
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 
+* Projectile and helm-projectile
+
+[[https://melpa.org/#/projectile][Projectile]] says "Manage and navigate projects in Emacs easily".  I was
+introduced to it via LSP and ~lsp-mode~ and thus far I haven't used it
+much.  I found [[https://melpa.org/#/helm-projectile][helm-projectile]] along the way and added it in too.
+
 #+begin_src emacs-lisp
   (leaf projectile
     :defvar projectile-mode-map
@@ -14,11 +20,42 @@
     :config
     (projectile-mode +1)
     (helm-projectile-on))
+#+end_src
 
+* Projectile Rails
+
+[[https://melpa.org/#/projectile-rails][projectile-rails]] says "Minor mode for Rails projects based on
+projectile-mode".  Again... just getting into it... Lets see how it
+shakes out.
+
+#+begin_src emacs-lisp
   (leaf projectile-rails
     :defvar projectile-rails-mode-map
     :defer-config
     (define-key projectile-rails-mode-map (kbd "s-r") 'projectile-rails-command-map))
+#+end_src
 
+* Per Project customization
+
+This has come up twice so far and I've used ~projectile~ only for a
+few weeks.  If you want to customize a "risky" variable in a directory
+or file local manner, it is a pain.  I don't want to just say that the
+variables are not risky because they are.  So, I am going to create
+small functions that will be called from a project's ~.dir-locals.el~
+file to set up the risky variables.
+
+#+begin_src emacs-lisp
+  (eval-when-compile
+    (defvar projectile-rails-custom-server-command))
+  (defun hatred-dir-local-setup ()
+    "Should only be called from the `.dir-locals.el' file in the
+    `hatred' project to set up some \"risky\" variables."
+    (setq projectile-rails-custom-server-command
+          "/Users/pedz/Source/hatred/docker/compose-up.sh"))
+#+end_src
+
+* Provide ~projectile-setup~
+
+#+begin_src emacs-lisp
   (provide 'projectile-setup)
 #+end_src

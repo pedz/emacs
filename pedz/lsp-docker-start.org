@@ -1,70 +1,134 @@
-(require 'lsp-docker)
+#+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
+#+STARTUP: content
+#+TITLE:  Set up for LSP in Docker environment
+#+AUTHOR: Perry Smith
+#+EMAIL:  pedz@easesoftware.com
 
-;; In the lsp-mode directory (where lsp-mode.el lives) is a
-;; subdirectory called "clients".  In there is a list of "clients".  I
-;; can't figure these terms out BUT the list below is a list of these
-;; "clients" that you want to be enabled inside the client / server /
-;; THING that you are defining / creating.  In my case, as far as I
-;; know, I want just the Solargraph "client".
-;;
-;; Actually this list is just a list of packages to `require' at the
-;; time the THING is registered -- so... it is much ado about nothing?
-(setq lsp-docker-client-packages
-    '(lsp-solargraph))
+* LSP setup using Docker containers
 
-;; From reading, I guess they call the external server the "server"
-;; and the piece either inside or outside of Emacs talking to the
-;; server, the "client".  But it gets very confusing (keep reading).
-;;
-;; Emacs has structures which are defined via `cl-defstruct'.
-;; `lsp-clients' is a hash of `lsp--client' structures which has a
-;; "slot" `server-id' whose comment is: "Unique identifier for
-;; representing the client object.".
-;;
-;; As mentioned `lsp-clients' is a hash (key value pairs) with the
-;; keys being the `server-id' (which is also within the structure).
-;;
-;; With all that in mind, then:
-;;
-;; :server-id -- needs to be an existing entry in lsp-clients.  You
-;;     can see the list and their priorities by executing:
-;;
-;;         (maphash
-;;          (lambda (key value)
-;;            (insert (format "%S  %d\n"
-;;                            key
-;;                            (lsp--client-priority value))))
-;;          lsp-clients)
-;;
-;;     in the *scratch*  buffer.
-;;
-;; :docker-server-id -- The name or id of the new "client object"
-;;     a.k.a. the `server-id'.  The existing entry is found via the
-;;     `server-id', updated, and entered as a new client using the
-;;     docker-server-id.
-;;
-;; :server-command -- This string is munged via
-;;     `lsp-docker-launch-new-container' into a list of strings which
-;;     is used to start the language server inside the Docker
-;;     image/container.  Basically it will turn into:
-;;
-;;         docker run --name TBD1 --rm -i TBD2 TBD3 `server-command'
-;;
-;;     TBD1 is `docker-container-name'; TBD2 are `path-mappings' that
-;;     have been transformed into a list of "-v" options.  TBD3 is
-;;     `docker-image-id'
-;;
-;; `docker-container-name' and `docker-image-id' will be specified below.
-;;
-(setq lsp-docker-client-configs
-      '((:server-id ruby-ls :docker-server-id rubyls-docker :server-command "/root/bin/solargraph stdio")))
+[[https://github.com/emacs-lsp/lsp-docker][lsp-docker]] allows [[https://github.com/emacs-lsp/lsp-mode][lsp-mode]] to work with the language server executing
+in a [[https://www.docker.com][Docker]] container.
 
-(lsp-docker-init-clients
- :path-mappings '(("/Users/pedz/Source/hatred" . "/hatred"))
- :docker-image-id "pedzsan/hatred:1.0"
- :docker-container-name "docker-ruby-lsp"
- :priority 10
- :client-packages lsp-docker-client-packages
- :client-configs lsp-docker-client-configs)
+** My initial mistake
 
-(provide 'lsp-docker-start)
+I was doing something different.  In my case, the Docker container was
+already running so I thought I wanted to just do an ~exec~ rather than
+a ~run~.  Also, ~lsp-docker-start~ did nothing when I tried it.  It
+did nothing because ~lsp-workspace-root~ returned nil.
+
+I have just now learned that ~dired~ buffers return ~nil~ for
+~buffer-file-name~.  I wrote a [[https://www.reddit.com/r/emacs/comments/ydyd95/what_dont_dired_buffers_have_a_bufferfilename/][Reddit post]] about this.  But, as the
+post explains, I thought I was way off track and so dug deeper and
+finally got what follows working.
+
+From reading, I guess they call the external server the "server" and
+the piece inside of Emacs talking to the server, the "client".  But it
+gets very confusing (keep reading).
+
+ELisp has structures which are defined via [[elisp:(describe-function 'cl-defstruct)][cl-defstruct]].  [[elisp:(describe-variable 'lsp-clients)][lsp-clients]]
+is a hash of [[elisp:(describe-variable 'lsp--client)][lsp--client]] structures which has a ~slot~ (i.e. field)
+called ~server-id~ whose comment is: "Unique identifier for
+representing the client object."  (See the confusing contradictions of
+terms?)
+
+As mentioned ~lsp-clients~ is a hash (key value pairs) with the keys
+being the ~server-id~ (which is also within the structure).
+
+The goal of this code is to define a new client.  This is done by
+calling [[elisp:(describe-function 'lsp-docker-init-clients)][lsp-docker-init-clients]] which searches the existing list of
+clients for the matching ~server-id~ and then modifying it into a new
+client with a new ~server-id~.
+
+** Load ~lsp-docker~
+
+The first step in this adventure is to load ~lsp-docker~
+
+#+begin_src emacs-lisp
+  (require 'lsp-docker)
+#+end_src
+
+** Create list of new client configurations
+
+A parameter to ~lsp-docker-init-clients~ is ~:client-configs~ which is
+a list where each element in the list has these fields or properties.
+These properties are documented in ~lsp-docker-init-clients~ but I've
+added some extra documentation that I learned along the way.
+
+- :server-id :: In the lsp-mode directory (where lsp-mode.el lives) is
+  a sub-directory called "clients" which has Elisp files that define
+  the standard list of "clients".
+
+  ~:server-id~ needs to be an existing entry in ~lsp-clients~.  The
+  current list of clients and their priorities can be viewed by
+  executing in the ~*scratch*~ buffer:
+  #+begin_src emacs-lisp :tangle no
+    (maphash
+     (lambda (key value)
+       (insert (format "%S  %d\n"
+                       key
+                       (lsp--client-priority value))))
+     lsp-clients)
+  #+end_src
+
+- :docker-server-id :: The name or id of the new "client object"
+  a.k.a. the ~server-id~.  The existing entry is found via the
+  ~server-id~, updated, and entered as a new client using the
+  docker-server-id.
+
+- :server-command :: This string is munged via
+  ~lsp-docker-launch-new-container~ into a list of strings which
+  is used to start the language server inside the Docker
+  image/container.  Basically it will turn into:
+  #+begin_src sh :tangle no
+        docker run --name TBD1 --rm -i TBD2 TBD3 ~server-command~
+  #+end_src
+  where:
+  
+  - TBD1 :: ~docker-container-name~
+
+  - TBD2 :: ~path-mappings~ that have been transformed into a list of
+    "-v" options
+
+  - TBD3 :: ~docker-image-id~. ~docker-container-name~ and
+    ~docker-image-id~ will be specified in the call to
+    ~lsp-docker-init-clients~.
+
+#+begin_src emacs-lisp
+  (defvar pedz/lsp-docker-client-configs
+        '((:server-id ruby-ls :docker-server-id rubyls-docker :server-command "/root/bin/solargraph stdio"))
+        "List of my client configurations created by `lsp-docker-start'")
+#+end_src
+
+** Create list of required packages
+
+The elements in this list are required.  The only package I need is
+~lsp-solargraph~ (which is included in the ~lsp-mode~ package.
+
+#+begin_src emacs-lisp
+  (defvar pedz/lsp-docker-client-packages
+      '(lsp-solargraph)
+      "List of other client packages that are required by the configurations in `pedz/lsp-docker-client-configs'")
+#+end_src
+
+** Create the new clients
+
+Having set up the two variables above, we can now call
+~lsp-docker-init-clients~ which will create the new clients.  After
+this, ~lsp-mode~ will find the new clients and since their priority is
+higher than the default list, they will be chosen first.
+
+#+begin_src emacs-lisp
+  (lsp-docker-init-clients
+   :path-mappings '(("/Users/pedz/Source/hatred" . "/hatred"))
+   :docker-image-id "pedzsan/hatred:1.0"
+   :docker-container-name "docker-ruby-lsp"
+   :priority 10
+   :client-packages pedz/lsp-docker-client-packages
+   :client-configs pedz/lsp-docker-client-configs)
+#+end_src
+
+* Provide ~lsp-docker-start~
+
+#+begin_src emacs-lisp
+  (provide 'lsp-docker-start)
+#+end_src

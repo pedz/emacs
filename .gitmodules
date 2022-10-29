@@ -195,6 +195,10 @@
 	path = lib/yaml
 	url = git@github.com:zkry/yaml.el.git
 	ignore = untracked
+[submodule "yaml-mode"]
+	path = lib/yaml-mode
+	url = git@github.com:yoshiki/yaml-mode.git
+	ignore = untracked
 [submodule "yari"]
 	path = lib/yari
 	url = git@github.com:hron/yari.el.git

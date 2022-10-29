@@ -169,7 +169,7 @@ buffers.
 
 [[https://github.com/fxbois/web-mode/tree/4b8a695825fda366927894e498421f35fce1cbb9][web-mode]] is a major mode for editing web templates
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (leaf web-mode
     :config
     (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode)))

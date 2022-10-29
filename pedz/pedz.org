@@ -172,6 +172,14 @@ programming again.
   (add-hook 'align-load-hook 'add-lua-align-list)
 #+end_src
 
+** YAML mode
+
+#+begin_src emacs-lisp
+  (leaf yaml-mode
+    :config
+    (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
+#+end_src
+
 ** TRAMP set up for hatred
 
 I'm not sure how best to do this.  It could be done via customization

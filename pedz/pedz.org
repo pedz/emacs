@@ -204,6 +204,7 @@ maintainable.  Note, there are exceptions.  I set tramp-remote-path to
   (pedz/org-require 'resize)
   (pedz/org-require 'projectile-setup)
   (pedz/org-require 'ruby-setup)
+  (pedz/org-require 'project-setups)
 #+end_src
 
 * Code and settings no longer in use

@@ -1,0 +1,120 @@
+#+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
+#+STRTUP: content
+#+TITLE:  Emacs Per Project Setups
+#+AUTHOR: Perry Smith
+#+EMAIL:  pedz@easesoftware.com
+
+* Introduction
+
+I've discovered that base Emacs has the concept of projects and
+classes of projects as well as the ability to have buffer local
+variable settings tied to the class and thus tied to the project.
+
+This is essentially what I was attempting to do with my ancient
+[[https://github.com/pedz/cscope.el/blob/master/inherit.el][inherit.el]].  Files and even buffers within the same directory
+structure most often share common values for variables.  In the
+original case, [[https://github.com/pedz/cscope.el/blob/master/cscope.el][cscope.el]] operated from a [[https://cscope.sourceforge.net][CScope]] database that knew
+about all the files at and below a particular directory.  But
+frequently I was using multiple cscope databases at the same time.
+For example when track down where bugs originated from I would often
+be looking at different versions of the same source.  This was before
+the days of ~git~ and ~blame~.
+
+This are new concepts to me so I'm going to explore the details of how
+they work.  I'm going to start with my Hatred project first.  Utopia
+would be to have the classes be things like /rails project using
+docker/ but I've learned it is easier to just do code for the specific
+situation first and then morph the result into more generic concepts
+as other examples are encountered.
+
+** Some low level functions
+
+These routines I assume are not going to be specific to one project.
+
+#+begin_src emacs-lisp
+    (defvar pedz/reset-projects nil
+      "List of projects that have been `erm-reset'")
+
+    (defun pedz/erm-reset-if-needed ()
+      "It appears the parse process used by `flymake' is started before
+        the local variables are processed.  This forces us to do an
+        `erm-reset' after they have been set but we only need to do this
+        once per project.  `pedz/reset-projects' is searched for the
+        `project-current'.  If found, nothing is done.  If not found, then
+        the `erm-reset' is done and the project is added to the list"
+      (let ((current-project (cdr (project-current))))
+        (unless (member current-project pedz/reset-projects)
+          (when (fboundp 'erm-reset)
+            (add-to-list 'pedz/reset-projects current-project)
+            (erm-reset)))))
+
+    (defun pedz/set-one ( var val )
+      (set (make-local-variable var) val))
+
+    (defun pedz/set-one-apply ( list )
+      (dolist (elt list)
+        (pedz/set-one (car elt) (cdr elt))))
+#+end_src
+
+** Hatred Project
+
+The list of attributes this project current has is:
+
+- [[https://rubyonrails.org][Rails v7 Project]]
+- [[https://www.ruby-lang.org/en/][Ruby v3]]
+- [[https://www.docker.com][Docker]]
+- [[https://docs.docker.com/compose/reference/][Docker Compose]]
+- [[https://github.com/zenspider/enhanced-ruby-mode][Enhanced Ruby]]
+- [[https://github.com/emacs-lsp/lsp-mode][LSP mode]]
+- [[https://projectile.mx][Projectile mode]]
+- [[https://github.com/asok/projectile-rails][Projectile Rails mode]]
+- [[info:flymake#Top][Flymake]]
+- [[https://solargraph.org][Solargraph]] 
+
+#+begin_src emacs-lisp
+  (defun pedz/hatred-set-default-mode-locals ()
+    "Sets the local variables and modes for the default mode in
+  the Hatred project"
+    (message "pedz/hatred-set-default-mode-locals called")
+    (pedz/set-one-apply
+     '(
+       (projectile-project-type                 . rails-rspec)
+       (projectile-rails-custom-server-command  . "/Users/pedz/Source/hatred/docker/compose-up.sh")
+       (rspec-docker-command                    . "docker exec")
+       (rspec-docker-container                  . "hatred-web-1")
+       (rspec-docker-cwd                        . "/hatred/")
+       (rspec-docker-file-name                  . "docker/Dockerfile")
+       (rspec-use-docker-when-possible          . t)
+       (yari-ri-program-name                    . "docker exec hatred-web-1 bin/bundle exec ri")
+       (yari-ruby-program-name                  . "docker exec hatred-web-1 bin/bundle exec ruby")
+       ))
+    (projectile-rails-mode +1))
+
+  (defun pedz/hatred-set-enh-ruby-mode-locals ()
+    "Sets the local variables and modes for the enhanced ruby mode in
+    the Hatred project"
+    (message "pedz/hatred-set-enh-ruby-mode-locals called")
+    (pedz/set-one-apply
+     '(
+       (enh-ruby-program . "/Users/pedz/Source/hatred/lib/ruby/ruby.sh")
+       (erm-source-dir   . "/hatred/lib/")
+       ))
+    (rspec-mode +1)
+    (lsp-deferred)
+    (pedz/erm-reset-if-needed))
+
+  ;;; It appears that the 'hatred class is defined here
+  (dir-locals-set-class-variables
+   'hatred
+   '((nil           . ((eval . (pedz/hatred-set-default-mode-locals))))
+     (enh-ruby-mode . ((eval . (pedz/hatred-set-enh-ruby-mode-locals))))))
+
+  ;;; and is reference here.
+  (dir-locals-set-directory-class "~/Source/hatred" 'hatred)
+#+end_src
+
+* Provide project-setups
+
+#+begin_src emacs-lisp
+  (provide 'project-setups)
+#+end_src

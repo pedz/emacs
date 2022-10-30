@@ -103,27 +103,8 @@
  '(rspec-use-rake-flag nil)
  '(rspec-use-rake-when-possible nil)
  '(safe-local-variable-values
-   '((eval hatred-dir-local-setup)
-     (eval lsp-deferred)
-     (eval lsp t)
-     (rspec-use-bundler-when-possible)
-     (rspec-use-docker-when-possible . t)
-     (rspec-docker-cwd . "/hatred/")
-     (eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
-           (add-hook 'write-contents-functions
-                     (lambda nil
-                       (delete-trailing-whitespace)
-                       nil))
-           (require 'whitespace)
-           "Sometimes the mode needs to be toggled off and on."
-           (whitespace-mode 0)
-           (whitespace-mode 1))
-     (whitespace-line-column . 80)
-     (whitespace-style face tabs trailing lines-tail)
-     (yari-ruby-program-name . "./docker/compose-exec.sh -T web bundle exec ruby")
-     (yari-ri-program-name . "./docker/compose-exec.sh -T web bundle exec ri")
-     (yari-ruby-program-name . "docker exec hatred-web-1 bin/bundle exec ruby")
-     (yari-ri-program-name . "docker exec hatred-web-1 bin/bundle exec ri")))
+   '((eval pedz/hatred-set-enh-ruby-mode-locals)
+     (eval pedz/hatred-set-default-mode-locals)))
  '(save-abbrevs nil)
  '(select-enable-primary t)
  '(send-mail-function 'mailclient-send-it)

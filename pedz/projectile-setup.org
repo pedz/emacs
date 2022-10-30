@@ -35,25 +35,6 @@ shakes out.
     (define-key projectile-rails-mode-map (kbd "s-r") 'projectile-rails-command-map))
 #+end_src
 
-* Per Project customization
-
-This has come up twice so far and I've used ~projectile~ only for a
-few weeks.  If you want to customize a "risky" variable in a directory
-or file local manner, it is a pain.  I don't want to just say that the
-variables are not risky because they are.  So, I am going to create
-small functions that will be called from a project's ~.dir-locals.el~
-file to set up the risky variables.
-
-#+begin_src emacs-lisp
-  (eval-when-compile
-    (defvar projectile-rails-custom-server-command))
-  (defun hatred-dir-local-setup ()
-    "Should only be called from the `.dir-locals.el' file in the
-    `hatred' project to set up some \"risky\" variables."
-    (setq projectile-rails-custom-server-command
-          "/Users/pedz/Source/hatred/docker/compose-up.sh"))
-#+end_src
-
 * Provide ~projectile-setup~
 
 #+begin_src emacs-lisp

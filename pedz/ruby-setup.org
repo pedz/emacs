@@ -162,7 +162,8 @@ buffers.
 #+begin_src emacs-lisp
   (leaf yari
     :config
-    (global-set-key (kbd "s-y") 'yari))
+    (global-set-key (kbd "s-y") 'yari)
+    (add-to-list 'yari-mode-hook #'hack-dir-local-variables-non-file-buffer))
 #+end_src
 
 *  web-mode

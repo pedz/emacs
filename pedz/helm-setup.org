@@ -14,6 +14,7 @@ be some useful nuggets in there so... why not?
   (leaf helm
     :custom
     (helm-command-prefix-key . "C-c h")
+    (helm-buffer-max-length . nil)
     :require helm helm-config
     :init 
     (global-set-key (kbd "M-x") 'helm-M-x)

@@ -197,6 +197,22 @@ maintainable.  Note, there are exceptions.  I set tramp-remote-path to
                        "remote-shell" "/usr/bin/zsh")))
 #+end_src
 
+** Flymake mode
+
+Setup keybindings when in Flymake mode
+
+#+begin_src emacs-lisp
+  (leaf flymake
+    :defvar flymake-mode-map
+    :defer-config
+    (define-key flymake-mode-map (kbd "s-f n") 'flymake-goto-next-error)
+    (define-key flymake-mode-map (kbd "s-f p") 'flymake-goto-prev-error)
+    (define-key flymake-mode-map (kbd "s-f s") 'flymake-start)
+    (define-key flymake-mode-map (kbd "s-f d") 'flymake-show-buffer-diagnostics)
+    (define-key flymake-mode-map (kbd "s-f l") 'flymake-switch-to-log-buffer)
+    (define-key flymake-mode-map (kbd "s-f m") 'flymake-mode))
+#+end_src
+
 ** Pull in other files
 
 #+begin_src emacs-lisp

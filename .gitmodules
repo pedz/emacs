@@ -127,6 +127,10 @@
 	path = lib/lsp-mode
 	url = git@github.com:emacs-lsp/lsp-mode.git
 	ignore = untracked
+[submodule "lsp-tailwindcss"]
+	path = lib/lsp-tailwindcss
+	url = git@github.com:merrickluo/lsp-tailwindcss.git
+	ignore = untracked
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git

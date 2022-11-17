@@ -69,7 +69,8 @@ The list of attributes this project current has is:
 - [[https://projectile.mx][Projectile mode]]
 - [[https://github.com/asok/projectile-rails][Projectile Rails mode]]
 - [[info:flymake#Top][Flymake]]
-- [[https://solargraph.org][Solargraph]] 
+- [[https://solargraph.org][Solargraph]]
+- [[http://rspec.info][rspec]]
 
 #+begin_src emacs-lisp
   (defun pedz/hatred-set-default-mode-locals ()
@@ -111,6 +112,43 @@ The list of attributes this project current has is:
 
   ;;; and is reference here.
   (dir-locals-set-directory-class "~/Source/hatred" 'hatred)
+#+end_src
+
+** Rails-7-Passkey-Demo
+
+This is a project that demonstrates how to do authentication using
+passkeys in a Rails 7 project.
+
+#+begin_src emacs-lisp
+  (defun pedz/rails-7-passkey-demo-set-default-mode-locals ()
+    "Sets the local variables and modes for the default mode in
+  the Rails-7-Passkey-Demo project"
+    (message "pedz/rails-7-passkey-demo-set-default-mode-locals called")
+    (pedz/set-one-apply
+     '(
+       (yari-ri-program-name     . "docker exec rails-7-passkey-demo-web-1 /root/bin/bundle exec ri")
+       (yari-ruby-program-name   . "docker exec rails-7-passkey-demo-web-1 /root/bin/bundle exec ruby")
+       ))
+    (projectile-rails-mode +1))
+
+  (defun pedz/rails-7-passkey-demo-set-enh-ruby-mode-locals ()
+    "Sets the local variables and modes for the enhanced ruby mode in
+    the Rails-7-Passkey-Demo project"
+    (message "pedz/rails-7-passkey-demo-set-enh-ruby-mode-locals called")
+    (pedz/set-one-apply
+     '(
+       (enh-ruby-program . "/Users/pedz/Source/rails-7-passkey-demo/lib/ruby/ruby.sh")
+       ))
+    )
+
+  ;;; It appears that the 'rails-7-passkey-demo class is defined here
+  (dir-locals-set-class-variables
+   'rails-7-passkey-demo
+   '((nil           . ((eval . (pedz/rails-7-passkey-demo-set-default-mode-locals))))
+     (enh-ruby-mode . ((eval . (pedz/rails-7-passkey-demo-set-enh-ruby-mode-locals))))))
+
+  ;;; and is reference here.
+  (dir-locals-set-directory-class "~/Source/rails-7-passkey-demo" 'rails-7-passkey-demo)
 #+end_src
 
 * Provide project-setups

@@ -125,6 +125,35 @@ between tabs (a.k.a ~command-{~ and ~command-}~).
   (global-set-key (kbd "s-{") #'tab-previous)
 #+end_src
 
+** Bind forward and backward symbol to H-f and H-b
+
+Move backward one symbol -- mapped to H-b
+
+
+#+begin_src emacs-lisp
+  (defun pedz/backward-one-symbol ()
+    "Moves backwards exactly one symbol"
+    (forward-symbol -1))
+
+  (global-set-key (kbd "H-f") #'forward-symbol)
+  (global-set-key (kbd "H-b") #'pedz/backward-one-symbol)
+#+end_src
+
+** ansi-color buffer
+
+The Rails logs have ANSI colors in them and there are other files
+too.  This little function hides all the escape sequences and properly
+colors the buffer.
+
+#+begin_src emacs-lisp
+  (defun pedz/ansi-color-apply-on-buffer ()
+    "Applies `ansi-color-apply-on-region' to the visible portion of the
+    current buffer with PRESERVE-SEQUENCES set to t so the sequences are
+    hidden and the buffer is not changed... at least that's the theory"
+    (interactive)
+    (ansi-color-apply-on-region (point-min) (point-max) t))
+#+end_src
+
 ** Unfill -- used when posting
 
 There are some things that do not like line breaks so I use this to do
@@ -211,6 +240,56 @@ Setup keybindings when in Flymake mode
     (define-key flymake-mode-map (kbd "s-f d") 'flymake-show-buffer-diagnostics)
     (define-key flymake-mode-map (kbd "s-f l") 'flymake-switch-to-log-buffer)
     (define-key flymake-mode-map (kbd "s-f m") 'flymake-mode))
+#+end_src
+
+** Org mode
+
+For whatever reason, I am trying to not use the ~customize.el~ file
+and use the ~customize~ option of ~leaf~.  I'm thinking it will be
+easier to find, etc.
+
+#+begin_src emacs-lisp
+  (leaf
+    :defvar org-html-head
+    :custom
+    (org-html-head . "
+  <style>
+  kbd {
+      display:          inline-block;
+      margin:           0 .1em;
+      padding:          .1em .6em;
+      font-family:      -apple-system,BlinkMacSystemFont,\"Segoe UI Adjusted\",\"Segoe UI\",\"Liberation Sans\",sans-serif;
+      font-size:        11px;
+      line-height:      1.5;
+      color:            hsl(210,8%,15%);
+      text-shadow:      0 1px 0 hsl(0,0%,100%);
+      background-color: hsl(210,8%,90%);
+      border:           1px solid hsl(210,8%,65%);
+      border-radius:    3px;
+      box-shadow:       0 1px 1px hsla(210, 8%, 5%, 0.15), inset 0 1px 0 0 hsl(0, 0%, 100%);
+      overflow-wrap:    break-word;
+  }
+
+  dt {
+      float:      left;
+      width:      30%;
+      text-align: right;
+      padding:    .25em;
+      clear:      left;
+  }
+
+  dd {
+      float:   left;
+      width:   60%;
+      padding: .25em 0;
+  }
+
+  dl:after {
+      content: \"\";
+      display: table;
+      clear:   both;
+  }
+    </style>"))
 #+end_src
 
 ** Pull in other files

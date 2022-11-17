@@ -15,6 +15,7 @@ be some useful nuggets in there so... why not?
     :custom
     (helm-command-prefix-key . "C-c h")
     (helm-buffer-max-length . nil)
+    (helm-ff-skip-boring-files . t)
     :require helm helm-config
     :init 
     (global-set-key (kbd "M-x") 'helm-M-x)

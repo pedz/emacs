@@ -61,7 +61,7 @@ semi-automatically resizing Emacs' frames.  The main entry point is
 
   (defun my-position-frame ()
     "Sets the current frame to the full hight of the largest (by
-    height) monitor currently connected.  Sets the width to 1/3rd of
+    height) monitor currently connected.  Sets the width to 1/2 of
     that monitor's width.  And positions the frame at the top center
     of that monitor's screen."
     (interactive)

@@ -44,9 +44,6 @@
  '(explicit-zsh-args '("-l" "-i" "+Z"))
  '(feature-cucumber-command "cucumber {options} \"{feature}\"")
  '(grep-find-ignored-directories (append vc-directory-exclusion-list (list ".bundle")))
- '(ignored-local-variable-values
-   '((checkdoc-package-keywords-flag)
-     (eshell-path-env . "/hatred/bin:/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin")))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-frame-alist
@@ -98,12 +95,15 @@
  '(nxhtml-skip-welcome nil nil nil "Shh!!!")
  '(org-clock-auto-clockout-timer 1800)
  '(package-selected-packages '(dash compat company))
+ '(project-vc-merge-submodules nil)
  '(rails-ws:default-server-type "webrick")
  '(rbenv-installation-dir "/Users/pedz/.config/rbenv")
  '(rspec-use-rake-flag nil)
  '(rspec-use-rake-when-possible nil)
  '(safe-local-variable-values
-   '((eval pedz/hatred-set-enh-ruby-mode-locals)
+   '((eval pedz/rails-7-passkey-demo-set-enh-ruby-mode-locals)
+     (eval pedz/rails-7-passkey-demo-set-default-mode-locals)
+     (eval pedz/hatred-set-enh-ruby-mode-locals)
      (eval pedz/hatred-set-default-mode-locals)))
  '(save-abbrevs nil)
  '(select-enable-primary t)

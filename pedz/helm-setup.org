@@ -12,18 +12,17 @@ be some useful nuggets in there so... why not?
 
 #+begin_src emacs-lisp
   (leaf helm
+    :require helm helm-config
     :custom
     (helm-command-prefix-key . "C-c h")
     (helm-buffer-max-length . nil)
     (helm-ff-skip-boring-files . t)
-    :require helm helm-config
-    :init 
-    (global-set-key (kbd "M-x") 'helm-M-x)
-    (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-    (global-set-key (kbd "C-x b") 'helm-mini)
-    (global-set-key (kbd "C-x C-f") 'helm-find-files)
-    :config
-    (helm-mode))
+    :bind (:global-map
+           ("M-x" .'helm-M-x)
+           ("M-y" .'helm-show-kill-ring)
+           ("C-x b" .'helm-mini)
+           ("C-x C-f" .'helm-find-files))
+    :config (helm-mode))
 #+end_src    
 
 ** Old setup

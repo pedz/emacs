@@ -1,5 +1,5 @@
 #+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
-#+STARTUP: content
+#+STRTUP: content
 #+TITLE:  Emacs Initialization
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
@@ -91,14 +91,16 @@ or [[https://elpa.gnu.org/packages/leaf.html][leaf]].
 
 ** Set up Leaf
 
-I picked [[https://elpa.gnu.org/packages/leaf.html][leaf]] because it understood el-get but now it seems that is
+I picked [[https://elpa.gnu.org/packages/leaf.html][leaf]] because it understood [[https://github.com/dimitri/el-get][el-get]] but now it seems that is
 mute because I stopped using ~el-get~.
 
 #+begin_src emacs-lisp
   (eval-when-compile
     (add-to-list 'load-path (expand-file-name "lib/leaf" user-emacs-directory))
     (require 'leaf))
+
   (leaf leaf-keywords
+    :require t
     :defun leaf-keywords-init
     :config
     (leaf-keywords-init))
@@ -123,12 +125,14 @@ is recommended by ~borg~ so the submodules are visible.
 
 ** Set up code to help debugging at the front
 
-#+begin_src emacs-lisp
-  ;; Nifty for debugging load issues and sequences
-  ;; This puts out a Loading message all the time
-  ;; (setq force-load-messages t)
-  ;; (defadvice require (before load-log activate)
-  ;;   (message "Requiring %s" (ad-get-arg 0)))
+Nifty for debugging load issues and sequences. This puts out a Loading
+message all the time.  This can be toggles on / off via the tangle
+argument.
+
+#+begin_src emacs-lisp :comments no :tangle no
+  (setq force-load-messages t)
+  (defadvice require (before load-log activate)
+    (message "Requiring %s" (ad-get-arg 0)))
 #+end_src
 
 ** Customize zsh should it be used within an inferior shell
@@ -168,11 +172,6 @@ Currently I have things split up into separate files all loaded by
   ;; (declare-function pedz/org-require "early-init" (sym &optional dont-load paths))
   (eval-when-compile
     (defun pedz/org-require (sym &optional dont-load paths)))
+  (message "about to pull in pedz")
   (pedz/org-require 'pedz)
-#+end_src
-
-** Set up creating Org mode code blocks easily.
-
-#+begin_src emacs-lisp
-  (pedz/org-require 'org-code-blocks)
 #+end_src

@@ -38,10 +38,6 @@
 	path = lib/docker
 	url = git@github.com:Silex/docker.el.git
 	ignore = untracked
-[submodule "docker-tramp"]
-	path = lib/docker-tramp
-	url = git@github.com:emacs-pe/docker-tramp.el.git
-	ignore = untracked
 [submodule "dockerfile-mode"]
 	path = lib/dockerfile-mode
 	url = git@github.com:spotify/dockerfile-mode.git
@@ -187,6 +183,9 @@
 	path = lib/tablist
 	url = git@github.com:politza/tablist.git
 	ignore = untracked
+[submodule "typescript-mode"]
+	path = lib/typescript-mode
+	url = git@github.com:emacs-typescript/typescript.el.git
 [submodule "web-mode"]
 	path = lib/web-mode
 	url = git@github.com:fxbois/web-mode.git

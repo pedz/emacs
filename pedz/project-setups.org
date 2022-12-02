@@ -121,8 +121,8 @@ passkeys in a Rails 7 project.
 
 #+begin_src emacs-lisp
   (defun pedz/rails-7-passkey-demo-set-default-mode-locals ()
-    "Sets the local variables and modes for the default mode in
-  the Rails-7-Passkey-Demo project"
+    "Sets the local variables and modes for the default mode in the
+  Rails-7-Passkey-Demo project"
     (message "pedz/rails-7-passkey-demo-set-default-mode-locals called")
     (pedz/set-one-apply
      '(
@@ -133,7 +133,7 @@ passkeys in a Rails 7 project.
 
   (defun pedz/rails-7-passkey-demo-set-enh-ruby-mode-locals ()
     "Sets the local variables and modes for the enhanced ruby mode in
-    the Rails-7-Passkey-Demo project"
+  the Rails-7-Passkey-Demo project"
     (message "pedz/rails-7-passkey-demo-set-enh-ruby-mode-locals called")
     (pedz/set-one-apply
      '(
@@ -141,11 +141,18 @@ passkeys in a Rails 7 project.
        ))
     )
 
+  (defun pedz/rails-7-passkey-demo-set-web-mode-locals ()
+    "Sets the local variables and modes for web-mode in the
+  Rails-7-Passkey-Demo project"
+    (message "pedz/rails-7-passkey-demo-set-web-mode-locals called")
+    (lsp-deferred))
+
   ;;; It appears that the 'rails-7-passkey-demo class is defined here
   (dir-locals-set-class-variables
    'rails-7-passkey-demo
    '((nil           . ((eval . (pedz/rails-7-passkey-demo-set-default-mode-locals))))
-     (enh-ruby-mode . ((eval . (pedz/rails-7-passkey-demo-set-enh-ruby-mode-locals))))))
+     (enh-ruby-mode . ((eval . (pedz/rails-7-passkey-demo-set-enh-ruby-mode-locals))))
+     (web-mode      . ((eval . (pedz/rails-7-passkey-demo-set-web-mode-locals))))))
 
   ;;; and is reference here.
   (dir-locals-set-directory-class "~/Source/rails-7-passkey-demo" 'rails-7-passkey-demo)

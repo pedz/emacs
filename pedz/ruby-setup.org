@@ -17,11 +17,22 @@ check the presence of a package by asking if symbols are bound.
 
 #+begin_src emacs-lisp
   (leaf enh-ruby-mode
-    :config
-    (when (fboundp #'enh-ruby-mode)
-      (add-to-list 'auto-mode-alist
-                   '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
-      (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))))
+    :mode "\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
+    :interpreter "ruby")
+#+end_src
+
+** company-inf-ruby
+
+[[https://github.com/company-mode/company-inf-ruby/tree/9c2eab3bb82e8838c54013026e6ffb51cccbd37e][company-inf-ruby]] allows company-mode completion back-end for inf-ruby
+buffers.
+
+#+begin_src emacs-lisp
+  (leaf company-inf-ruby
+    :after company
+    :defvar company-backends
+    :defun company-inf-ruby
+    :defer-config
+    (add-to-list 'company-backends #'company-inf-ruby))
 #+end_src
 
 * Set up rbenv
@@ -32,9 +43,7 @@ check the presence of a package by asking if symbols are bound.
   (leaf rbenv
     :custom
     (rbenv-installation-dir . "~/.config/rbenv")
-    :config
-    (when (fboundp #'global-rbenv-mode)
-      (add-hook 'enh-ruby-mode-hook #'global-rbenv-mode)))
+    :hook (enh-ruby-mode-hook . global-rbenv-mode))
 #+end_src
 
 * Rubocop-mode
@@ -43,12 +52,7 @@ check the presence of a package by asking if symbols are bound.
 
 #+begin_src emacs-lisp
   (leaf rubocop
-    :defvar rubocop-mode-map
-    :defer-config
-    (define-key rubocop-mode-map (kbd "s-c") 'rubocop-command-map)
-    :config
-    (when (fboundp #'rubocop-mode)
-      (add-hook 'enh-ruby-mode-hook #'rubocop-mode)))
+    :bind (:rubocop-mode-map ("s-c" . rubocop-command-map)))
 #+end_src
 
 * rspec-mode
@@ -57,102 +61,10 @@ Currently I have rspec-mode enabled via .dir-locals.el so there is
 nothing to do but just as a placeholder:
 
 #+begin_src emacs-lisp
-  (leaf rspec-mode)
-#+end_src
-
-* LSP
-
-[[https://microsoft.github.io/language-server-protocol/][Language Server Protocol]] (LSP) originated in Microsoft's Visual Studio
-Code and has since become an open standard.  The idea is to have a
-"Language Server" that understands the language separate from the
-editor.
-
-I might need to spin all of the LSP stuff off into its own separate
-file but for now, I'll just add them here.
-
-** lsp-mode
-
-[[https://emacs-lsp.github.io/lsp-mode/][emacs-lsp/lsp-mode]] is the piece inside Emacs that talks to
-the language server.  The only place I've used it so far is with Ruby
-and the language server I'm using is called [[https://solargraph.org][Solargraph]].  To make
-matters harder, I'm using it with the Ruby code as well as Solargraph
-in a Docker container.
-
-The instructions for installing lsp-mode for
-[[https://emacs-lsp.github.io/lsp-mode/page/installation/#vanilla-emacs][Vanilla Emacs]] does not mention to add the "clients" sub-directory to
-[[elisp:(describe-variable 'load-path)][load-path]].  If you don't, [[elisp:(describe-variable 'lsp-clients)][lsp-clients]] is empty and things don't work.
-
-#+begin_src emacs-lisp
-  (leaf lsp-mode
-    :defer-config
-    (require 'lsp-docker-start)
-    :config
-    (when (fboundp #'lsp-deferred)
-      (add-to-list 'load-path (expand-file-name "lib/lsp-mode/clients" user-emacs-directory))))
-#+end_src
-
-** helm-lsp
-
-When setting up LSP, it said it can not configure ~company-mode~
-because I have not installed it yet.  I thought I would see if it
-could use helm instead so I found the [[https://github.com/emacs-lsp/helm-lsp][helm-lsp]] package but it only
-hooks in to one key.  But I'll keep it anyway.
-
-#+begin_src emacs-lisp
-  (leaf helm-lsp
-    :defvar lsp-mode-map
-    :config
-    (when (and (fboundp #'lsp-deferred) (fboundp #'helm-lsp-workspace-symbol))
-      (eval-after-load 'lsp-mode
-        '(define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol))))
-#+end_src
-
-* company
-
-I don't know how to pronounce this since it stands for COMPlete ANY.
-It was introduced to me via [[lsp-mode]] but it seems to be a big Emacs
-subculture with about 30 packages tying back into it.
-
-[[http://company-mode.github.io][company]] is often referred to as just ~company-mode~.  It is the main
-mode.  I currently have it enabled everywhere -- not just in the
-[[lsp-mode]] buffers.
-
-#+begin_src emacs-lisp
-  (leaf company
-    :defun global-company-mode
-    :require t
-    :config
-    (global-company-mode))
-#+end_src
-
-** company-inf-ruby
-
-[[https://github.com/company-mode/company-inf-ruby/tree/9c2eab3bb82e8838c54013026e6ffb51cccbd37e][company-inf-ruby]] allows company-mode completion back-end for inf-ruby
-buffers.
-
-#+begin_src emacs-lisp
-  (leaf company-inf-ruby
-    :defvar company-backends
-    :defun company-inf-ruby
-    :config
-    (when (and (fboundp #'company-inf-ruby) (fboundp #'inf-ruby))
-      (eval-after-load 'company
-        '(add-to-list 'company-backends #'company-inf-ruby))))
-#+end_src
-
-** helm-company
-
-[[https://github.com/Sodel-the-Vociferous/helm-company/tree/6eb5c2d730a60e394e005b47c1db018697094dde][helm-company]] is Helm interface for company-mode.
-
-#+begin_src emacs-lisp
-  (leaf helm-company
-    :defvar company-mode-map company-active-map
-    :config
-    (when (fboundp #'helm-company)
-      (eval-after-load 'company
-        '(progn
-           (define-key company-mode-map (kbd "C-:") 'helm-company)
-           (define-key company-active-map (kbd "C-:") 'helm-company)))))
+  (leaf rspec-mode
+    :custom
+    (rspec-use-rake-flag . nil)
+    (rspec-use-rake-when-possible . nil))
 #+end_src
 
 * yari
@@ -161,9 +73,10 @@ buffers.
 
 #+begin_src emacs-lisp
   (leaf yari
+    :require t
+    :bind (:global-map ("s-y" . yari))
     :defvar yari-mode-hook
-    :config
-    (global-set-key (kbd "s-y") 'yari)
+    ;; I think I don't need the defer-config anymore
     :defer-config
     (add-to-list 'yari-mode-hook #'hack-dir-local-variables-non-file-buffer))
 #+end_src
@@ -174,8 +87,7 @@ buffers.
 
 #+begin_src emacs-lisp
   (leaf web-mode
-    :config
-    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode)))
+    :mode "\\.erb\\'")
 #+end_src
 
 * Provide ruby-setup

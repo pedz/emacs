@@ -12,11 +12,10 @@ much.  I found [[https://melpa.org/#/helm-projectile][helm-projectile]] along th
 
 #+begin_src emacs-lisp
   (leaf projectile
-    :defvar projectile-mode-map
+    :bind (:projectile-mode-map
+           ("s-p" . 'projectile-command-map))
     :defun helm-projectile-on
     :require projectile helm-projectile
-    :defer-config
-    (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
     :config
     (projectile-mode +1)
     (helm-projectile-on))
@@ -30,9 +29,9 @@ shakes out.
 
 #+begin_src emacs-lisp
   (leaf projectile-rails
-    :defvar projectile-rails-mode-map
-    :defer-config
-    (define-key projectile-rails-mode-map (kbd "s-r") 'projectile-rails-command-map))
+    :after projectile
+    :bind (:projectile-rails-mode-map
+           ("s-r" . 'projectile-rails-command-map)))
 #+end_src
 
 * Provide ~projectile-setup~

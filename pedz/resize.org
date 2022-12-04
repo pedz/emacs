@@ -10,22 +10,22 @@ semi-automatically resizing Emacs' frames.  The main entry point is
 #+begin_src emacs-lisp
   (defun workarea-left ( monitor )
     "MONITOR is an entry from `display-monitor-attributes-list' The
-    left entry (1st value) of the 'workarea' is returned"
+    left entry (1st value) of the `workaarea' is returned"
     (nth 1 (assoc 'workarea monitor)))
 
   (defun workarea-top ( monitor )
     "MONITOR is an entry from `display-monitor-attributes-list' The
-    top entry (2nd value) of the 'workarea' is returned"
+    top entry (2nd value) of the `workaarea' is returned"
     (nth 2 (assoc 'workarea monitor)))
 
   (defun workarea-width ( monitor )
     "MONITOR is an entry from `display-monitor-attributes-list' The
-    width entry (3rd value) of the 'workarea' is returned"
+    width entry (3rd value) of the `workaarea' is returned"
     (nth 3 (assoc 'workarea monitor)))
 
   (defun workarea-height ( monitor )
     "MONITOR is an entry from `display-monitor-attributes-list' The
-    height entry (4th value) of the 'workarea' is returned"
+    height entry (4th value) of the `workaarea' is returned"
     (nth 4 (assoc 'workarea monitor)))
 
   (defun monitor-with-largest-height-helper ( a b )
@@ -40,7 +40,7 @@ semi-automatically resizing Emacs' frames.  The main entry point is
 
   (defun monitor-with-largest-height ()
     "Returns the monitor entry from `display-monitor-attributes-list'
-    with the largest 'workarea' height"
+    with the largest `workaarea' height"
     (cl-reduce #'monitor-with-largest-height-helper
                (display-monitor-attributes-list)))
 

@@ -4,6 +4,7 @@
 /auto-save-list
 /backup
 /bookmarks
+/eln-cache
 /epkgs/
 /eshell
 /init.el

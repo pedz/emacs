@@ -1,7 +1,6 @@
 ;;; early-init.el --- early bird  -*- no-byte-compile: t -*-
 
-;;; I like debugging via printfs.  This makes it easier.  The current
-;;; implementation is untested so it is commented out for now.
+;;; I like debugging via printfs.  This makes it easier.
 (defun pedz/debug ( &rest args )
   "Simply forwards ARGS to `message'.  Using a different name makes
 it easier to go back, find and remove messages added simply for
@@ -41,9 +40,9 @@ Return a list whose CAR is the tangled file name.
 (setq load-prefer-newer t)
 (dolist (dir '( "lib/packed" "lib/auto-compile" "lib/compat" ))
   (add-to-list 'load-path (expand-file-name dir user-emacs-directory)))
-(require 'auto-compile)
-(auto-compile-on-load-mode)
-(auto-compile-on-save-mode)
+;; (require 'auto-compile)
+;; (auto-compile-on-load-mode)
+;; (auto-compile-on-save-mode)
 
 ;;;
 ;;; In shifting from ~.el~ files to ~.org~ files, it seems prudent to

@@ -11,6 +11,10 @@ be some useful nuggets in there so... why not?
 ** Current setup
 
 #+begin_src emacs-lisp
+  (eval-when-compile
+    (add-to-list 'load-path (expand-file-name "lib/leaf" user-emacs-directory))
+    (require 'leaf))
+
   (leaf helm
     :require helm helm-config
     :custom
@@ -26,6 +30,9 @@ be some useful nuggets in there so... why not?
 #+end_src    
 
 ** Old setup
+
+This is not tangled (output to ~helm-setup.el~) and is kept just as a
+reference of past suggestions that I've tried.
 
 #+begin_src emacs-lisp :tangle no
   ;; From Tuhdo's Tutorial http://tuhdo.github.io/helm-intro.html with

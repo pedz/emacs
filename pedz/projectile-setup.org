@@ -4,6 +4,14 @@
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 
+* Require leaf when compiling
+
+#+begin_src emacs-lisp
+  (eval-when-compile
+    (add-to-list 'load-path (expand-file-name "lib/leaf" user-emacs-directory))
+    (require 'leaf))
+#+end_src
+
 * Projectile and helm-projectile
 
 [[https://melpa.org/#/projectile][Projectile]] says "Manage and navigate projects in Emacs easily".  I was

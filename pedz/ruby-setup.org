@@ -4,6 +4,14 @@
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 
+* Require leaf when compiling
+
+#+begin_src emacs-lisp
+  (eval-when-compile
+    (add-to-list 'load-path (expand-file-name "lib/leaf" user-emacs-directory))
+    (require 'leaf))
+#+end_src
+
 * Set up enh-ruby-mode
 
 My belief is that the way ~leaf~ works is it does not actually check

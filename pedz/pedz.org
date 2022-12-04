@@ -7,6 +7,18 @@
 :PROPERTIES:
 :header-args: emacs-lisp :comments link :tangle yes
 :END:
+** Require leaf when compiling
+
+Many of these things use ~leaf~ so I require it here if the file is
+being compiled.  This solves many issues with asynchronous native
+compilation.  This same concept is in various other files as well.
+
+#+begin_src emacs-lisp
+  (eval-when-compile
+    (add-to-list 'load-path (expand-file-name "lib/leaf" user-emacs-directory))
+    (require 'leaf))
+#+end_src
+
 ** Small tweaks
 
 Emacs disables a few commands so that new users do not get hopelessly
@@ -156,6 +168,9 @@ too.  This little function hides all the escape sequences and properly
 colors the buffer.
 
 #+begin_src emacs-lisp
+  (eval-when-compile
+    (require 'ansi-color))
+
   (defun pedz/ansi-color-apply-on-buffer ()
     "Applies `ansi-color-apply-on-region' to the visible portion of the
     current buffer with PRESERVE-SEQUENCES set to t so the sequences are
@@ -282,6 +297,9 @@ creates a code block AND allows the type of code block to be specified
 by a file local lisp variable.
 
 #+begin_src emacs-lisp
+  (eval-when-compile
+    (require 'org))
+  
   (defun pedz/org-insert-backtick ()
     "Insert a backtick using `org-self-insert-command'."
     (interactive)

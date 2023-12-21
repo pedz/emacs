@@ -26,10 +26,6 @@
 	path = lib/company-inf-ruby
 	url = git@github.com:company-mode/company-inf-ruby.git
 	ignore = untracked
-[submodule "compat"]
-	path = lib/compat
-	url = https://git.sr.ht/~pkal/compat
-	ignore = untracked
 [submodule "dash"]
 	path = lib/dash
 	url = git@github.com:magnars/dash.el.git

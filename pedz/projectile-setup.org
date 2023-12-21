@@ -24,8 +24,7 @@ much.  I found [[https://melpa.org/#/helm-projectile][helm-projectile]] along th
            ("s-p" . 'projectile-command-map))
     :defun helm-projectile-on
     :require projectile helm-projectile
-    :config
-    (projectile-mode +1)
+    :config (projectile-mode +1)
     (helm-projectile-on))
 #+end_src
 

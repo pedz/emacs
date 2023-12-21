@@ -3,6 +3,55 @@
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 
+* Key bindings currently being used
+
+This comment needs to be kept up to date so beware.
+
+From pedz.org:
+#+begin_src emacs-lisp :tangle no
+  :bind (:flymake-mode-map
+             (("s-f n" . 'flymake-goto-next-error)
+              ("s-f p" . 'flymake-goto-prev-error)
+              ("s-f s" . 'flymake-start)
+              ("s-f d" . 'flymake-show-buffer-diagnostics)
+              ("s-f l" . 'flymake-switch-to-log-buffer)
+              ("s-f m" . 'flymake-mode)))
+  :bind (:org-mode-map (("~" . #'pedz/org-insert-backtick)
+                            ("`" . #'pedz/org-insert-tilde)))
+  :bind (:lsp-mode-map
+             :package lsp-mode
+             ([remap xref-find-apropos] . #'helm-lsp-workspace-symbol))
+  :bind (:company-active-map
+             ("<tab>" . company-complete-selection))
+  :bind (:company-mode-map
+             :package company
+             ("C-:" . helm-company))
+#+end_src
+
+           
+From helm-setup.org:
+#+begin_src emacs-lisp :tangle no
+  :bind (:global-map
+             ("M-x" .'helm-M-x)
+             ("M-y" .'helm-show-kill-ring)
+             ("C-x b" .'helm-mini)
+             ("C-x C-f" .'helm-find-files))
+#+end_src
+
+From ruby-setup.org:
+#+begin_src emacs-lisp :tangle no
+  :bind (:rubocop-mode-map ("s-c" . rubocop-command-map))
+  :bind (:global-map ("s-y" . yari))
+#+end_src
+
+From projectile-setup.org:
+#+begin_src emacs-lisp :tangle no
+  :bind (:projectile-mode-map
+             ("s-p" . 'projectile-command-map))
+  :bind (:projectile-rails-mode-map
+             ("s-r" . 'projectile-rails-command-map))
+#+end_src
+
 * Code and settings currently in use
 :PROPERTIES:
 :header-args: emacs-lisp :comments link :tangle yes
@@ -424,10 +473,9 @@ hooks in to one key.  But I'll keep it anyway.
 #+begin_src emacs-lisp
   (leaf helm-lsp
     :after lsp-mode
-    :bind
-    (:lsp-mode-map
-     :package lsp-mode
-     ([remap xref-find-apropos] . #'helm-lsp-workspace-symbol)))
+    :bind (:lsp-mode-map
+           :package lsp-mode
+           ([remap xref-find-apropos] . #'helm-lsp-workspace-symbol)))
 #+end_src
 
 ** company
@@ -444,9 +492,8 @@ mode.  I currently have it enabled everywhere -- not just in the
   (leaf company
     :after lsp-mode
     :hook (prog-mode . company-mode)
-    :bind
-    (:company-active-map
-     ("<tab>" . company-complete-selection))
+    :bind (:company-active-map
+           ("<tab>" . company-complete-selection))
     (:lsp-mode-map
      ("<tab>" . company-indent-or-complete-common))
     :custom
@@ -461,10 +508,9 @@ mode.  I currently have it enabled everywhere -- not just in the
 #+begin_src emacs-lisp
   (leaf helm-company
     :after company
-    :bind
-    (:company-mode-map
-     :package company
-     ("C-:" . helm-company))
+    :bind (:company-mode-map
+           :package company
+           ("C-:" . helm-company))
     (:company-active-map
      :package company
      ("C-:" . helm-company)))

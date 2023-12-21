@@ -24,9 +24,9 @@ give me a warning message that =foo package is not available=.
 check the presence of a package by asking if symbols are bound.
 
 #+begin_src emacs-lisp
-  (leaf enh-ruby-mode
-    :mode "\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
-    :interpreter "ruby")
+  ;; (leaf enh-ruby-mode
+  ;;   :mode "\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
+  ;;   :interpreter "ruby")
 #+end_src
 
 ** company-inf-ruby

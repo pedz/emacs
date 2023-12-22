@@ -16,8 +16,9 @@ be some useful nuggets in there so... why not?
     (require 'leaf))
 
   (leaf helm
-    :require helm helm-config
+    :require helm
     :custom
+    (load "helm-autoloads" nil t)
     (helm-command-prefix-key . "C-c h")
     (helm-buffer-max-length . nil)
     (helm-ff-skip-boring-files . t)

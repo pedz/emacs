@@ -25,12 +25,12 @@
  '(backup-directory-alist '(("." . "~/.config/emacs/backup")))
  '(case-fold-search nil)
  '(default-frame-alist
-    '((minibuffer . t)
-      (menu-bar-lines . 0)
-      (background-color . "black")
-      (cursor-color . "SlateBlue")
-      (foreground-color . "grey")
-      (mouse-color . "Blue")))
+   '((minibuffer . t)
+     (menu-bar-lines . 0)
+     (background-color . "black")
+     (cursor-color . "SlateBlue")
+     (foreground-color . "grey")
+     (mouse-color . "Blue")))
  '(delete-old-versions t)
  '(dired-use-ls-dired nil)
  '(display-buffer-reuse-frames t)
@@ -108,8 +108,7 @@
  '(select-enable-primary t)
  '(send-mail-function 'mailclient-send-it)
  '(shell-popd-regexp "popd\\|P")
- '(shell-prompt-pattern ".+@.+<[0-9]+> on .*
-")
+ '(shell-prompt-pattern ".+@.+<[0-9]+> on .*\12")
  '(shell-pushd-regexp "pushd\\|p")
  '(split-width-threshold 1600)
  '(standard-indent 2)
@@ -120,10 +119,3 @@
  '(vc-ignore-dir-regexp "\\`\\([\\/][\\/]\\|/\\.\\.\\./\\|/net/\\|/afs/\\)\\'")
  '(version-control t)
  '(web-mode-markup-indent-offset 2))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

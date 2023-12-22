@@ -99,7 +99,8 @@
  '(rails-ws:default-server-type "webrick")
  '(rbenv-installation-dir "/Users/pedz/.config/rbenv" t)
  '(safe-local-variable-values
-   '((eval pedz/rails-7-passkey-demo-set-web-mode-locals)
+   '((eval pedz/hatred-set-web-mode-locals)
+     (eval pedz/rails-7-passkey-demo-set-web-mode-locals)
      (eval pedz/rails-7-passkey-demo-set-enh-ruby-mode-locals)
      (eval pedz/rails-7-passkey-demo-set-default-mode-locals)
      (eval pedz/hatred-set-enh-ruby-mode-locals)
@@ -119,3 +120,9 @@
  '(vc-ignore-dir-regexp "\\`\\([\\/][\\/]\\|/\\.\\.\\./\\|/net/\\|/afs/\\)\\'")
  '(version-control t)
  '(web-mode-markup-indent-offset 2))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

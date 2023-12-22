@@ -5,6 +5,7 @@
 /backup
 /bookmarks
 /eln-cache
+/elpa
 /epkgs/
 /eshell
 /init.el
@@ -13,3 +14,4 @@
 /recentf
 /tramp
 /transient
+/tree-sitter

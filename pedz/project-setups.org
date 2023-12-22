@@ -104,12 +104,19 @@ The list of attributes this project current has is:
     (lsp-deferred)
     (pedz/erm-reset-if-needed))
 
+  (defun pedz/hatred-set-web-mode-locals ()
+    "Sets the local variables and modes for web-mode in the
+  Rails-7-Passkey-Demo project"
+    (message "pedz/hatred-set-web-mode-locals called")
+    (lsp-deferred))
+
   ;;; It appears that the 'hatred class is defined here
   (dir-locals-set-class-variables
    'hatred
    '((nil           . ((eval . (pedz/hatred-set-default-mode-locals))))
-     (enh-ruby-mode . ((eval . (pedz/hatred-set-enh-ruby-mode-locals))))))
-
+     (enh-ruby-mode . ((eval . (pedz/hatred-set-enh-ruby-mode-locals))))
+     (web-mode      . ((eval . (pedz/hatred-set-web-mode-locals))))))
+     
   ;;; and is reference here.
   (dir-locals-set-directory-class "~/Source/hatred" 'hatred)
 #+end_src

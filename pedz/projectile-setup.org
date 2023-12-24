@@ -1,6 +1,5 @@
 #+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
 #+STARTUP: content
-#+TITLE:  Emacs projectile et. al. setup
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 

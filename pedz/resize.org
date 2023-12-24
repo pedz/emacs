@@ -1,11 +1,10 @@
 #+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
-#+TITLE:  Emacs Window Resizing Additions
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 
 These are some routines I wrote to help with automatically or
 semi-automatically resizing Emacs' frames.  The main entry point is 
-[[defun my-position-frame (][my-position-frame]].
+~my-position-frame~.
 
 #+begin_src emacs-lisp
   (defun workarea-left ( monitor )

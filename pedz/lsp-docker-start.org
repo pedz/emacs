@@ -1,6 +1,5 @@
 #+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
 #+STARTUP: content
-#+TITLE:  Set up for LSP in Docker environment
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 

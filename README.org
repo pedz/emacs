@@ -12,3 +12,5 @@ I am now using [[https://github.com/emacscollective/borg/blob/master/borg.el][bo
 
 I've kept a lot of my old crap in either code that is not tangled or
 stuffed away in the ~old~ directory.
+
+#+INCLUDE: "init.org" :minlevel 1

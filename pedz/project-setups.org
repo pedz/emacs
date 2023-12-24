@@ -1,6 +1,5 @@
 #+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
 #+STRTUP: content
-#+TITLE:  Emacs Per Project Setups
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 

@@ -1,5 +1,4 @@
 #+STARTUP: content
-#+TITLE:  More Emacs Initialization
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 
@@ -939,3 +938,9 @@ reference.
 #+begin_src emacs-lisp
   (provide 'pedz)
 #+end_src
+
+#+INCLUDE: "helm-setup.org" :minlevel 1
+#+INCLUDE: "resize.org" :minlevel 1
+#+INCLUDE: "projectile-setup.org" :minlevel 1
+#+INCLUDE: "ruby-setup.org" :minlevel 1
+#+INCLUDE: "project-setups.org" :minlevel 1

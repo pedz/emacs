@@ -1,7 +1,11 @@
-#+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
+#+PROPERTY: header-args:emacs-lisp :comments no :tangle yes
 #+STRTUP: content
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
+
+#+begin_src emacs-lisp
+  ;;; -*- lexical-binding: t; -*-
+#+end_src
 
 * Introduction
 
@@ -31,28 +35,28 @@ as other examples are encountered.
 These routines I assume are not going to be specific to one project.
 
 #+begin_src emacs-lisp
-    (defvar pedz/reset-projects nil
-      "List of projects that have been `erm-reset'")
+  (defvar pedz/reset-projects nil
+    "List of projects that have been `erm-reset'")
 
-    (defun pedz/erm-reset-if-needed ()
-      "It appears the parse process used by `flymake' is started before
-        the local variables are processed.  This forces us to do an
-        `erm-reset' after they have been set but we only need to do this
-        once per project.  `pedz/reset-projects' is searched for the
-        `project-current'.  If found, nothing is done.  If not found, then
-        the `erm-reset' is done and the project is added to the list"
-      (let ((current-project (cdr (project-current))))
-        (unless (member current-project pedz/reset-projects)
-          (when (fboundp 'erm-reset)
-            (add-to-list 'pedz/reset-projects current-project)
-            (erm-reset)))))
+  (defun pedz/erm-reset-if-needed ()
+    "It appears the parse process used by `flymake' is started before
+      the local variables are processed.  This forces us to do an
+      `erm-reset' after they have been set but we only need to do this
+      once per project.  `pedz/reset-projects' is searched for the
+      `project-current'.  If found, nothing is done.  If not found, then
+      the `erm-reset' is done and the project is added to the list"
+    (let ((current-project (cdr (project-current))))
+      (unless (member current-project pedz/reset-projects)
+        (when (fboundp 'erm-reset)
+          (add-to-list 'pedz/reset-projects current-project)
+          (erm-reset)))))
 
-    (defun pedz/set-one ( var val )
-      (set (make-local-variable var) val))
+  (defun pedz/set-one ( var val )
+    (set (make-local-variable var) val))
 
-    (defun pedz/set-one-apply ( list )
-      (dolist (elt list)
-        (pedz/set-one (car elt) (cdr elt))))
+  (defun pedz/set-one-apply ( list )
+    (dolist (elt list)
+      (pedz/set-one (car elt) (cdr elt))))
 #+end_src
 
 ** Hatred Project

@@ -115,6 +115,9 @@
 	path = lib/libgit
 	url = git@github.com:magit/libegit2.git
 	ignore = untracked
+[submodule "llama"]
+	path = lib/llama
+	url = https://github.com/tarsius/llama
 [submodule "lsp-docker"]
 	path = lib/lsp-docker
 	url = git@github.com:emacs-lsp/lsp-docker.git

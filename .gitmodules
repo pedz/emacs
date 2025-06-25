@@ -14,6 +14,9 @@
 	path = lib/borg
 	url = git@github.com:emacscollective/borg.git
 	ignore = untracked
+[submodule "ccls"]
+	path = lib/ccls
+	url = https://github.com/emacs-lsp/emacs-ccls
 [submodule "closql"]
 	path = lib/closql
 	url = git@github.com:emacscollective/closql.git
@@ -142,6 +145,9 @@
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
 	ignore = untracked
+[submodule "platformio-mode"]
+	path = lib/platformio-mode
+	url = https://github.com/ZachMassia/PlatformIO-Mode
 [submodule "projectile"]
 	path = lib/projectile
 	url = git@github.com:bbatsov/projectile.git

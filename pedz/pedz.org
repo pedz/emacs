@@ -2,6 +2,10 @@
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 
+#+begin_src emacs-lisp
+  ;;; -*- lexical-binding: t; -*-
+#+end_src
+
 * Key bindings currently being used
 
 This comment needs to be kept up to date so beware.
@@ -453,12 +457,15 @@ The instructions for installing lsp-mode for
 [[elisp:(describe-variable 'load-path)][load-path]].  If you don't, [[elisp:(describe-variable 'lsp-clients)][lsp-clients]] is empty and things don't work.
 
 #+begin_src emacs-lisp
+  (declare-function lsp-deferred "lsp-mode")
+  (declare-function pedz/org-require "early-init")
+
   (leaf lsp-mode
     :defvar lsp-language-id-configuration lsp-file-watch-ignored-directories
     :defer-config
     (add-to-list 'lsp-language-id-configuration '(".*\\.erb$" . "html"))
     (add-to-list 'lsp-file-watch-ignored-directories "/tmp\\'")
-    (require 'lsp-docker-start)
+    (pedz/org-require 'lsp-docker-start)
     :load-path* "lib/lsp-mode/clients")
 #+end_src
 
@@ -515,6 +522,30 @@ mode.  I currently have it enabled everywhere -- not just in the
      ("C-:" . helm-company)))
 #+end_src
 
+** PlatformIO
+
+PlatformIO is used for embedded projects such as those using the
+RP2040, Arduino, etc.
+
+#+begin_src emacs-lisp
+    ;;; I can't figure out how to use `leaf.  I want the two additions
+    ;;; to the hooks always executed and it appears as if `leaf always
+    ;;; executes stuff after the package is loaded
+    (declare-function platformio-conditionally-enable "platformio")
+
+    (defun pedz/platformio-mode ()
+      "Calls `platformio-conditionally-enable after `lsp-deferred"
+      (require 'ccls)
+      (setq ccls-initialization-options
+            `(:clang (:extraArgs ["--gcc-toolchain=/Users/pedz/.platformio/packages/toolchain-xtensa-esp32/xtensa-esp32-elf"
+                                  "--sysroot=/Users/pedz/.platformio/packages/toolchain-xtensa-esp32"
+                                  "--gcc-triple=8.4.0"])))
+      (lsp-deferred)
+      (platformio-conditionally-enable))
+
+    (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
+    (add-hook 'c++-mode-hook #'pedz/platformio-mode)
+#+end_src
 
 ** Pull in other files
 

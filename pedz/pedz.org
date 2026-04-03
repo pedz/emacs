@@ -319,6 +319,31 @@ in Emacs.  This is scheduled to happen with Emacs 29.  Until then,
     :mode "\\.ts\\'")
 #+end_src
 
+** Swift tree-sitter mode
+
+To get [[https://github.com/rechsteiner/swift-ts-mode][swift-ts-mode]] to work, the [[https://github.com/alex-pinkus/tree-sitter-swift][Swift tree-sitter grammar]] needs to
+be installed.
+
+    1. Go to the [[https://github.com/alex-pinkus/tree-sitter-swift/actions][GitHub actions page]].
+    2. Click on the "Publish grammar.json and parser.c".
+    3. Click on the topmost "run" in the list with the green
+       checkmarks.
+    4. Scroll down to Artifacts and click on "generated-parser-src".
+       This will download a zip file.
+    5. Unzip the file and cd into the directory.
+    6. Compile parser.c and scanner.c with:\\
+       ~cc -fPIC -c -I. parser.c~\\
+       ~cc -fPIC -c -I. scanner.c~
+    7. Then link the two objects with:\\
+       ~cc -fPIC -shared *.o -o libtree-sitter-swift.dylib~
+    8. Move =libtree-sitter-swift.dylib= into
+       =~/.config/emacs/tree-sitter=
+
+#+begin_src emacs-lisp
+  (leaf swift-ts-mode
+    :mode "\\.swift\\'")
+#+end_src
+
 ** Flymake mode
 
 Setup keybindings when in Flymake mode

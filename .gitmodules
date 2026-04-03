@@ -188,6 +188,9 @@
 	path = lib/spinner
 	url = git@github.com:Malabarba/spinner.el.git
 	ignore = untracked
+[submodule "swift-ts-mode"]
+	path = lib/swift-ts-mode
+	url = https://github.com/rechsteiner/swift-ts-mode
 [submodule "tablist"]
 	path = lib/tablist
 	url = git@github.com:politza/tablist.git

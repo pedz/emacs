@@ -145,9 +145,6 @@
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
 	ignore = untracked
-[submodule "platformio-mode"]
-	path = lib/platformio-mode
-	url = https://github.com/ZachMassia/PlatformIO-Mode
 [submodule "projectile"]
 	path = lib/projectile
 	url = git@github.com:bbatsov/projectile.git

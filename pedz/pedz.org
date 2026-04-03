@@ -527,6 +527,13 @@ mode.  I currently have it enabled everywhere -- not just in the
 PlatformIO is used for embedded projects such as those using the
 RP2040, Arduino, etc.
 
+Aside from the comment below, when I went to update my Emacs startup I
+found that platformio-mode had changes that I could not track down as
+to who made them.  I vaguely remember issues with platformio-mode but
+I can't find any trace of what it was or how it was fixed.  So, I am
+going to just delete it from the startup and re-figure it out if and
+when I start doing embedded projects again.
+
       # ;;; I can't figure out how to use `leaf.  I want the two additions
       # ;;; to the hooks always executed and it appears as if `leaf always
       # ;;; executes stuff after the package is loaded

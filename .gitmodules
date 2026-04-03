@@ -33,6 +33,9 @@
 	path = lib/compat
 	url = https://github.com/emacs-compat/compat
 	ignore = untracked
+[submodule "cond-let"]
+	path = lib/cond-let
+	url = git@github.com:tarsius/cond-let.git
 [submodule "dash"]
 	path = lib/dash
 	url = git@github.com:magnars/dash.el.git

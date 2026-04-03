@@ -17,14 +17,15 @@
 introduced to it via LSP and ~lsp-mode~ and thus far I haven't used it
 much.  I found [[https://melpa.org/#/helm-projectile][helm-projectile]] along the way and added it in too.
 
+Removed  :config (projectile-mode +1)
+
 #+begin_src emacs-lisp
   (leaf projectile
     :bind (:projectile-mode-map
            ("s-p" . 'projectile-command-map))
     :defun helm-projectile-on
     :require projectile helm-projectile
-    :config (projectile-mode +1)
-    (helm-projectile-on))
+    :config (helm-projectile-on))
 #+end_src
 
 * Projectile Rails

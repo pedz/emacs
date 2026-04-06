@@ -191,6 +191,7 @@
 [submodule "swift-ts-mode"]
 	path = lib/swift-ts-mode
 	url = https://github.com/rechsteiner/swift-ts-mode
+	ignore = untracked
 [submodule "tablist"]
 	path = lib/tablist
 	url = git@github.com:politza/tablist.git

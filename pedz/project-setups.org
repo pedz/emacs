@@ -1,5 +1,4 @@
-#+PROPERTY: header-args:emacs-lisp :comments no :tangle yes
-#+STRTUP: content
+#+STARTUP: content
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 
@@ -8,6 +7,9 @@
 #+end_src
 
 * Introduction
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 I've discovered that base Emacs has the concept of projects and
 classes of projects as well as the ability to have buffer local
@@ -169,6 +171,9 @@ passkeys in a Rails 7 project.
 #+end_src
 
 * Provide project-setups
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 #+begin_src emacs-lisp
   (provide 'project-setups)

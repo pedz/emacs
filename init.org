@@ -1,9 +1,15 @@
-#+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
-#+STRTUP: content
+#+STARTUP: content
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 
+#+begin_src emacs-lisp
+  ;;; -*- lexical-binding: t; -*-
+#+end_src
+
 * Set up key external packages
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 We need to set up our package manager and our package configuration
 macros early so they are available for the rest of the init process.
@@ -98,11 +104,7 @@ mute because I stopped using ~el-get~.
     (add-to-list 'load-path (expand-file-name "lib/leaf" user-emacs-directory))
     (require 'leaf))
 
-  (leaf leaf-keywords
-    :require t
-    :defun leaf-keywords-init
-    :config
-    (leaf-keywords-init))
+  (leaf leaf-keywords)
 #+end_src
 
 ** Set up Magit
@@ -114,13 +116,17 @@ is recommended by ~borg~ so the submodules are visible.
   (leaf magit
     :defun magit-add-section-hook
     :defer-config
+    ;; This came from the initialization of borg instructions
     (magit-add-section-hook 'magit-status-sections-hook
-			    'magit-insert-modules
-			    'magit-insert-stashes
-			    'append))
+        		    'magit-insert-modules
+        		    'magit-insert-stashes
+        		    'append))
 #+end_src
 
 * Original init file
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 ** Set up code to help debugging at the front
 
@@ -168,9 +174,9 @@ Currently I have things split up into separate files all loaded by
   (eval-and-compile
     (add-to-list 'load-path (expand-file-name "pedz" user-emacs-directory)))
   ;; See https://github.com/emacscollective/borg/discussions/135#discussioncomment-3954786
+  ;; (eval-when-compile
+  ;;   (defun pedz/org-require (sym &optional dont-load paths)))
   ;; (declare-function pedz/org-require "early-init" (sym &optional dont-load paths))
-  (eval-when-compile
-    (defun pedz/org-require (sym &optional dont-load paths)))
   (message "about to pull in pedz")
   (pedz/org-require 'pedz)
 #+end_src

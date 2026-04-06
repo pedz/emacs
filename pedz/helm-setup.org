@@ -1,6 +1,11 @@
-#+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
+#+begin_src emacs-lisp
+  ;;; -*- lexical-binding: t; -*-
+#+end_src
 
 * Helm
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 I've slowly come to totally embrace [[https://emacs-helm.github.io/helm/][helm]].  Below are two code pieces,
 one used and one not used.  The not used is something I found and
@@ -18,7 +23,6 @@ be some useful nuggets in there so... why not?
   (leaf helm
     :require helm
     :custom
-    (load "helm-autoloads" nil t)
     (helm-command-prefix-key . "C-c h")
     (helm-buffer-max-length . nil)
     (helm-ff-skip-boring-files . t)
@@ -111,6 +115,9 @@ reference of past suggestions that I've tried.
 #+end_src
 
 * Provide helm-setup
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 #+begin_src emacs-lisp
   (provide 'helm-setup)

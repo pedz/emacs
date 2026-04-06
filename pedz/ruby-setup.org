@@ -1,9 +1,15 @@
-#+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
-#+STRTUP: content
+#+STARTUP: content
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 
+#+begin_src emacs-lisp
+  ;;; -*- lexical-binding: t; -*-
+#+end_src
+
 * Require leaf when compiling
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 #+begin_src emacs-lisp
   (eval-when-compile
@@ -12,6 +18,9 @@
 #+end_src
 
 * Set up enh-ruby-mode
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 My belief is that the way ~leaf~ works is it does not actually check
 to see if anything is available because I am not adding ~:ensure~ nor
@@ -43,6 +52,9 @@ buffers.
 #+end_src
 
 * Set up rbenv
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 [[https://github.com/senny/rbenv.el][rbenv]] causes Emacs to use the correct version of Ruby.
 
@@ -54,6 +66,9 @@ buffers.
 #+end_src
 
 * Rubocop-mode
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 [[https://github.com/rubocop/rubocop-emacs][Rubocop]] pesters you to write nice beautiful code.
 
@@ -63,6 +78,9 @@ buffers.
 #+end_src
 
 * rspec-mode
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 Currently I have rspec-mode enabled via .dir-locals.el so there is
 nothing to do but just as a placeholder:
@@ -75,6 +93,9 @@ nothing to do but just as a placeholder:
 #+end_src
 
 * yari
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 [[https://github.com/hron/yari.el/tree/a2cb9656ee5dfe1fc2ee3854f3079a1c8e85dbe9][yari]] stands for "Yet Another Ruby Interactive Reference
 
@@ -89,6 +110,9 @@ nothing to do but just as a placeholder:
 #+end_src
 
 *  web-mode
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 [[https://github.com/fxbois/web-mode/tree/4b8a695825fda366927894e498421f35fce1cbb9][web-mode]] is a major mode for editing web templates
 
@@ -98,6 +122,9 @@ nothing to do but just as a placeholder:
 #+end_src
 
 * Provide ruby-setup
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 #+begin_src emacs-lisp
   (provide 'ruby-setup)

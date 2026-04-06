@@ -1,9 +1,15 @@
-#+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
 #+STARTUP: content
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 
+#+begin_src emacs-lisp
+  ;;; -*- lexical-binding: t; -*-
+#+end_src
+
 * LSP setup using Docker containers
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 [[https://github.com/emacs-lsp/lsp-docker][lsp-docker]] allows [[https://github.com/emacs-lsp/lsp-mode][lsp-mode]] to work with the language server executing
 in a [[https://www.docker.com][Docker]] container.
@@ -127,6 +133,9 @@ higher than the default list, they will be chosen first.
 #+end_src
 
 * Provide ~lsp-docker-start~
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 #+begin_src emacs-lisp
   (provide 'lsp-docker-start)

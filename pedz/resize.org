@@ -1,6 +1,15 @@
-#+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
+#+STARTUP: content
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
+
+#+begin_src emacs-lisp
+  ;;; -*- lexical-binding: t; -*-
+#+end_src
+
+* Resize routines
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 These are some routines I wrote to help with automatically or
 semi-automatically resizing Emacs' frames.  The main entry point is 

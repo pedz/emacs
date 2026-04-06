@@ -7,8 +7,17 @@
 This is my new Emacs configuration based upon [[https://en.wikipedia.org/wiki/Literate_programming][Literate Programming]]
 techniques using [[https://orgmode.org][Org Mode]] formatting.
 
-I am now using [[https://github.com/emacscollective/borg/blob/master/borg.el][borg]] instead of ~el-get~ for my package manager and
-[[https://elpa.gnu.org/packages/leaf.html][leaf]] for package configuration.
+I am now using [[https://github.com/emacscollective/borg/blob/master/borg.el][borg]] instead of [[https://github.com/dimitri/el-get][el-get]] for my package manager and [[https://elpa.gnu.org/packages/leaf.html][leaf]]
+for package configuration.
+
+It turns out that I was not really using ~borg~ nor ~leaf~ optimally.
+~Borg~, like [[info:packages][package]] creates an autoload file for each "drone" (what
+~borg~ calls packages) and it loads all of the autoload files during
+[[help:borg-initialize]].  Thus, for almost all cases, the call to ~leaf~
+does not need to do anything with the common exception of when
+specialized setup is needed.  Note also that since the git
+repositories are pulled down by ~borg~, there is no need for
+~:ensure~.
 
 I've kept a lot of my old crap in either code that is not tangled or
 stuffed away in the ~old~ directory.

@@ -7,6 +7,9 @@
 #+end_src
 
 * Key bindings currently being used
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 This comment needs to be kept up to date so beware.
 
@@ -66,6 +69,7 @@ being compiled.  This solves many issues with asynchronous native
 compilation.  This same concept is in various other files as well.
 
 #+begin_src emacs-lisp
+  ; Doggy sue
   (eval-when-compile
     (add-to-list 'load-path (expand-file-name "lib/leaf" user-emacs-directory))
     (require 'leaf))

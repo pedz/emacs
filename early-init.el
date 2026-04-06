@@ -79,7 +79,13 @@ Unless DONT-LOAD is true, SYM is then `require'd."
 	    (setq done t)
 	    (if (file-newer-than-file-p org-path el-path)
 		(progn
-		  (message "Tangle %s" org-path)
+		  (message "Tangle %s to %s" org-path el-path)
+                  ;; Somehow, if org-path was newer but unchanged,
+                  ;; el-path would not get updated which meant that we
+                  ;; would go through this path on every start up for
+                  ;; every org file that had been touched but not
+                  ;; changed.
+                  (delete-file el-path)
 		  (org-babel-tangle-file org-path el-path))))
 	  (when (file-exists-p el-path)
 	    (setq done t)

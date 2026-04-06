@@ -1,9 +1,15 @@
-#+PROPERTY: header-args:emacs-lisp :comments link :tangle yes
 #+STARTUP: content
 #+AUTHOR: Perry Smith
 #+EMAIL:  pedz@easesoftware.com
 
+#+begin_src emacs-lisp
+  ;;; -*- lexical-binding: t; -*-
+#+end_src
+
 * Require leaf when compiling
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 #+begin_src emacs-lisp
   (eval-when-compile
@@ -12,6 +18,9 @@
 #+end_src
 
 * Projectile and helm-projectile
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 [[https://melpa.org/#/projectile][Projectile]] says "Manage and navigate projects in Emacs easily".  I was
 introduced to it via LSP and ~lsp-mode~ and thus far I haven't used it
@@ -29,6 +38,9 @@ Removed  :config (projectile-mode +1)
 #+end_src
 
 * Projectile Rails
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 [[https://melpa.org/#/projectile-rails][projectile-rails]] says "Minor mode for Rails projects based on
 projectile-mode".  Again... just getting into it... Lets see how it
@@ -42,6 +54,9 @@ shakes out.
 #+end_src
 
 * Provide ~projectile-setup~
+:PROPERTIES:
+:header-args: emacs-lisp :comments link :tangle yes
+:END:
 
 #+begin_src emacs-lisp
   (provide 'projectile-setup)

@@ -136,6 +136,9 @@
 	path = lib/lsp-tailwindcss
 	url = git@github.com:merrickluo/lsp-tailwindcss.git
 	ignore = untracked
+[submodule "lsp-ui"]
+	path = lib/lsp-ui
+	url = https://github.com/emacs-lsp/lsp-ui
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git

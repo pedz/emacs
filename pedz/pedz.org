@@ -496,6 +496,9 @@ The instructions for installing lsp-mode for
     (add-to-list 'lsp-file-watch-ignored-directories "/tmp\\'")
     (pedz/org-require 'lsp-docker-start)
     :load-path* "lib/lsp-mode/clients")
+
+  ;; I assume this will get pulled in via some autoload
+  (leaf leaf-ui)
 #+end_src
 
 *** helm-lsp

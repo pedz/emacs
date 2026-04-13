@@ -490,6 +490,8 @@ The instructions for installing lsp-mode for
   (declare-function pedz/org-require "early-init")
 
   (leaf lsp-mode
+    :commands lsp
+    :hook (swift-ts-mode-hook . lsp)
     :defvar lsp-language-id-configuration lsp-file-watch-ignored-directories
     :defer-config
     (add-to-list 'lsp-language-id-configuration '(".*\\.erb$" . "html"))
@@ -497,8 +499,12 @@ The instructions for installing lsp-mode for
     (pedz/org-require 'lsp-docker-start)
     :load-path* "lib/lsp-mode/clients")
 
-  ;; I assume this will get pulled in via some autoload
+  ;;; I assume this will get pulled in via some autoload
   (leaf leaf-ui)
+
+  ;;; Again, I assume this will get pulled in via an autoload.
+  (leaf lsp-sourcekit)
+
 #+end_src
 
 *** helm-lsp
@@ -556,6 +562,11 @@ mode.  I currently have it enabled everywhere -- not just in the
 
 ** PlatformIO
 
+UPDATE 2026-04-12 -- I removed platformio-mode because I had local
+changes that I didn't understand and could not find any reference to
+them.  If and when I start doing embedded development again, I will
+need to figure out what I did and why.
+
 PlatformIO is used for embedded projects such as those using the
 RP2040, Arduino, etc.
 
@@ -584,7 +595,7 @@ when I start doing embedded projects again.
       # (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
       # (add-hook 'c++-mode-hook #'pedz/platformio-mode)
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (use-package project
     :config
     (add-hook 'project-find-functions #'platformio-project-root-override))

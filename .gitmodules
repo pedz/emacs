@@ -132,6 +132,9 @@
 	path = lib/lsp-mode
 	url = git@github.com:emacs-lsp/lsp-mode.git
 	ignore = untracked
+[submodule "lsp-sourcekit"]
+	path = lib/lsp-sourcekit
+	url = https://github.com/emacs-lsp/lsp-sourcekit
 [submodule "lsp-tailwindcss"]
 	path = lib/lsp-tailwindcss
 	url = git@github.com:merrickluo/lsp-tailwindcss.git

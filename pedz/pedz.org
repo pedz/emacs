@@ -323,6 +323,17 @@ in Emacs.  This is scheduled to happen with Emacs 29.  Until then,
     :mode "\\.ts\\'")
 #+end_src
 
+** Swift mode
+
+I am using swift-ts-mode instead of swift-mode so this is here but
+turned off.  Both have been assimilated so it is just a matter of
+which is hooked to trigger when a Swift file is loaded.
+
+#+begin_src emacs-lisp :tangle no
+  (leaf swift-mode
+    :mode "\\.swift\\'")
+#+end_src
+
 ** Swift tree-sitter mode
 
 To get [[https://github.com/rechsteiner/swift-ts-mode][swift-ts-mode]] to work, the [[https://github.com/alex-pinkus/tree-sitter-swift][Swift tree-sitter grammar]] needs to
@@ -489,9 +500,12 @@ The instructions for installing lsp-mode for
   (declare-function lsp-deferred "lsp-mode")
   (declare-function pedz/org-require "early-init")
 
+  ;;; swift-mode and swift-ts-mode do NOT use lsp-mode but use eglot mode instead.
   (leaf lsp-mode
     :commands lsp
-    :hook (swift-ts-mode-hook . lsp)
+    ; left as a reminder.
+    ; :hook (swift-mode-hook . lsp)
+    ; :hook (swift-ts-mode-hook . lsp)
     :defvar lsp-language-id-configuration lsp-file-watch-ignored-directories
     :defer-config
     (add-to-list 'lsp-language-id-configuration '(".*\\.erb$" . "html"))
@@ -504,6 +518,20 @@ The instructions for installing lsp-mode for
 
   ;;; Again, I assume this will get pulled in via an autoload.
   (leaf lsp-sourcekit)
+
+#+end_src
+
+#+begin_src emacs-lisp
+  (declare-function pedz/org-require "early-init")
+
+  ;;; Currently eglot mode is used only for Swift
+  (leaf eglot
+    :hook (swift-mode-hook . eglot-ensure)
+    :hook (swift-ts-mode-hook . eglot-ensure)
+    :defvar eglot-server-programs
+    :defer-config
+    (add-to-list 'eglot-server-programs
+                 '(swift-ts-mode . ("sourcekit-lsp"))))
 
 #+end_src
 

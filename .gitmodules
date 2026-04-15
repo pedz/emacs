@@ -194,6 +194,11 @@
 	path = lib/spinner
 	url = git@github.com:Malabarba/spinner.el.git
 	ignore = untracked
+[submodule "swift-mode"]
+	path = lib/swift-mode
+	url = https://github.com/swift-emacs/swift-mode
+        disabled = true
+	ignore = untracked
 [submodule "swift-ts-mode"]
 	path = lib/swift-ts-mode
 	url = https://github.com/rechsteiner/swift-ts-mode

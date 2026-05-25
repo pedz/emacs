@@ -89,6 +89,7 @@
 	path = lib/helm-projectile
 	url = git@github.com:bbatsov/helm-projectile.git
 	ignore = untracked
+        disabled = true
 [submodule "ht"]
 	path = lib/ht
 	url = git@github.com:Wilfred/ht.el.git
@@ -128,20 +129,25 @@
 	path = lib/lsp-docker
 	url = git@github.com:emacs-lsp/lsp-docker.git
 	ignore = untracked
+        disabled = true
 [submodule "lsp-mode"]
 	path = lib/lsp-mode
 	url = git@github.com:emacs-lsp/lsp-mode.git
 	ignore = untracked
+        disabled = true
 [submodule "lsp-sourcekit"]
 	path = lib/lsp-sourcekit
 	url = https://github.com/emacs-lsp/lsp-sourcekit
+        disabled = true
 [submodule "lsp-tailwindcss"]
 	path = lib/lsp-tailwindcss
 	url = git@github.com:merrickluo/lsp-tailwindcss.git
 	ignore = untracked
+        disabled = true
 [submodule "lsp-ui"]
 	path = lib/lsp-ui
 	url = https://github.com/emacs-lsp/lsp-ui
+        disabled = true
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git
@@ -158,10 +164,12 @@
 	path = lib/projectile
 	url = git@github.com:bbatsov/projectile.git
 	ignore = untracked
+        disabled = true
 [submodule "projectile-rails"]
 	path = lib/projectile-rails
 	url = git@github.com:asok/projectile-rails.git
 	ignore = untracked
+        disabled = true
 [submodule "rake"]
 	path = lib/rake
 	url = git@github.com:asok/rake.git

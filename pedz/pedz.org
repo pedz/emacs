@@ -50,6 +50,14 @@ From ruby-setup.org:
   :bind (:global-map ("s-y" . yari))
 #+end_src
 
+#+BEGIN_COMMENT
+I'm switching from projectile to project (built into emacs) and so I
+have stopped loading and using projectile-setup.org, ruby-setup.org,
+and project-setups.org.  When I start working on Hatred again, I will
+get all that working again.  These used lsp-mode and projectile and I
+am moving to eglot and project because lsp-mode didn't seem to work on
+Xcode Swift projects.
+
 From projectile-setup.org:
 #+begin_src emacs-lisp :tangle no
   :bind (:projectile-mode-map
@@ -57,6 +65,7 @@ From projectile-setup.org:
   :bind (:projectile-rails-mode-map
              ("s-r" . 'projectile-rails-command-map))
 #+end_src
+#+END_COMMENT
 
 * Code and settings currently in use
 :PROPERTIES:
@@ -474,7 +483,32 @@ easier to find, etc.
 
 #+end_src
 
-** LSP
+** Eglot
+
+This is still new.  As I'm writing this, I got eglot to work last
+night and today I'm switching from projectile to project and trying to
+verify tht eglot is working.  I hope to circle back here and clean
+things up when I'm confident they are working.
+
+#+begin_src emacs-lisp
+  (declare-function pedz/org-require "early-init")
+
+  ;;; Currently eglot mode is used only for Swift
+  (leaf eglot
+    :hook (swift-mode-hook . eglot-ensure)
+    :hook (swift-ts-mode-hook . eglot-ensure)
+    :defvar eglot-server-programs
+    :defer-config
+    (add-to-list 'eglot-server-programs
+                 '(swift-ts-mode . ("sourcekit-lsp"))))
+
+#+end_src
+
+
+
+#+BEGIN_COMMENT
+
+,** LSP
 
 [[https://microsoft.github.io/language-server-protocol/][Language Server Protocol]] (LSP) originated in Microsoft's Visual Studio
 Code and has since become an open standard.  The idea is to have a
@@ -484,9 +518,12 @@ editor.
 I might need to spin all of the LSP stuff off into its own separate
 file but for now, I'll just add them here.
 
-*** lsp-mode
+,*** lsp-mode
 
-[[https://emacs-lsp.github.io/lsp-mode/][emacs-lsp/lsp-mode]] is the piece inside Emacs that talks to
+I was using lsp-mode and projectile but I am switching to eglot and
+project.
+
+[[emacs-lsp/lsp-mode]] is the piece inside Emacs that talks to
 the language server.  The only place I've used it so far is with Ruby
 and the language server I'm using is called [[https://solargraph.org][Solargraph]].  To make
 matters harder, I'm using it with the Ruby code as well as Solargraph
@@ -521,21 +558,7 @@ The instructions for installing lsp-mode for
 
 #+end_src
 
-#+begin_src emacs-lisp
-  (declare-function pedz/org-require "early-init")
-
-  ;;; Currently eglot mode is used only for Swift
-  (leaf eglot
-    :hook (swift-mode-hook . eglot-ensure)
-    :hook (swift-ts-mode-hook . eglot-ensure)
-    :defvar eglot-server-programs
-    :defer-config
-    (add-to-list 'eglot-server-programs
-                 '(swift-ts-mode . ("sourcekit-lsp"))))
-
-#+end_src
-
-*** helm-lsp
+,*** helm-lsp
 
 When setting up LSP, it said it can not configure ~company-mode~
 because I have not installed it yet.  I thought I would see if it
@@ -550,6 +573,8 @@ hooks in to one key.  But I'll keep it anyway.
            ([remap xref-find-apropos] . #'helm-lsp-workspace-symbol)))
 #+end_src
 
+#+END_COMMENT
+
 ** company
 
 I don't know how to pronounce this since it stands for COMPlete ANY.
@@ -560,7 +585,8 @@ subculture with about 30 packages tying back into it.
 mode.  I currently have it enabled everywhere -- not just in the
 [[lsp-mode]] buffers.
 
-#+begin_src emacs-lisp
+When I had lsp-mode
+#+begin_src emacs-lisp :tangle no
   (leaf company
     :after lsp-mode
     :hook (prog-mode . company-mode)
@@ -568,6 +594,17 @@ mode.  I currently have it enabled everywhere -- not just in the
            ("<tab>" . company-complete-selection))
     (:lsp-mode-map
      ("<tab>" . company-indent-or-complete-common))
+    :custom
+    (company-minimum-prefix-length . 2)
+    (company-idle-delay . 0.5))
+#+end_src
+
+Now when I use eglot:
+#+begin_src emacs-lisp
+  (leaf company
+    :hook (prog-mode . company-mode)
+    :bind (:company-active-map
+           ("<tab>" . company-complete-selection))
     :custom
     (company-minimum-prefix-length . 2)
     (company-idle-delay . 0.5))
@@ -634,6 +671,9 @@ when I start doing embedded projects again.
 #+begin_src emacs-lisp
   (pedz/org-require 'helm-setup)
   (pedz/org-require 'resize)
+#+end_src
+
+#+begin_src emacs-lisp :tangle no
   (pedz/org-require 'projectile-setup)
   (pedz/org-require 'ruby-setup)
   (pedz/org-require 'project-setups)
@@ -1054,6 +1094,9 @@ reference.
 
 #+INCLUDE: "helm-setup.org" :minlevel 1
 #+INCLUDE: "resize.org" :minlevel 1
+
+#+BEGIN_COMMENT
 #+INCLUDE: "projectile-setup.org" :minlevel 1
 #+INCLUDE: "ruby-setup.org" :minlevel 1
 #+INCLUDE: "project-setups.org" :minlevel 1
+#+END_COMMENT

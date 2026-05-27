@@ -435,9 +435,15 @@ For whatever reason, I am trying to not use the ~customize.el~ file
 and use the ~customize~ option of ~leaf~.  I'm thinking it will be
 easier to find, etc.
 
+I don't know where I got the value for org-html-head but the kbd
+results in a very nice keyboard display.  And the dt, dd, and dl tags
+result in attractive description lists.
+
 #+begin_src emacs-lisp
   (leaf org
-    :hook ('org-mode-hook . #'org-clock-auto-clockout-insinuate)
+    :mode "\\.org\\'"
+    :defvar org-mode-hook
+    :hook (org-mode-hook . org-clock-auto-clockout-insinuate)
     :bind (:org-mode-map (("~" . #'pedz/org-insert-backtick)
                           ("`" . #'pedz/org-insert-tilde)))
     :defvar org-html-head
@@ -480,7 +486,7 @@ easier to find, etc.
       clear:   both;
   }
     </style>"))
-
+    
 #+end_src
 
 ** Eglot

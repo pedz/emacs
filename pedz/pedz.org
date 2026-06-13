@@ -132,13 +132,6 @@ keymaps it was bound on and removed it.
     (message "case-fold-search is now %s"
              (prin1-to-string (setq case-fold-search (not case-fold-search)))))
 
-  (defun pedz/list-all-matching-lines (regexp &optional nlines)
-    (interactive "sList lines matching regexp: \nP")
-    (let ((here (point)))
-      (goto-char (point-min))
-      (occur regexp nlines)
-      (goto-char here)))
-
   (defun pedz/recenter-top ()
     "Redraw page with the current line at the top of the page"
     (interactive)
@@ -170,7 +163,7 @@ keymaps it was bound on and removed it.
   (define-key pedz/personal-map (kbd "C-w") #'compare-windows)
   (define-key pedz/personal-map (kbd "W")   #'whitespace-cleanup)
   (define-key pedz/personal-map (kbd "b")   #'bury-buffer)
-  (define-key pedz/personal-map (kbd "l")   #'pedz/list-all-matching-lines)
+  (define-key pedz/personal-map (kbd "l")   #'list-matching-lines)
   (define-key pedz/personal-map (kbd "t")   #'pedz/recenter-top)
   (define-key pedz/personal-map (kbd "w")   #'compare-windows)
 
@@ -682,6 +675,9 @@ when I start doing embedded projects again.
 #+begin_src emacs-lisp :tangle no
   (pedz/org-require 'projectile-setup)
   (pedz/org-require 'ruby-setup)
+#+end_src
+
+#+begin_src emacs-lisp
   (pedz/org-require 'project-setups)
 #+end_src
 
@@ -1104,5 +1100,5 @@ reference.
 #+BEGIN_COMMENT
 #+INCLUDE: "projectile-setup.org" :minlevel 1
 #+INCLUDE: "ruby-setup.org" :minlevel 1
-#+INCLUDE: "project-setups.org" :minlevel 1
 #+END_COMMENT
+#+INCLUDE: "project-setups.org" :minlevel 1

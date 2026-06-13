@@ -84,7 +84,8 @@
  '(rails-ws:default-server-type "webrick")
  '(rbenv-installation-dir "/Users/pedz/.config/rbenv" t)
  '(safe-local-variable-values
-   '((eval pedz/hatred-set-web-mode-locals)
+   '((eval pedz/canon-eos-doc-org-mode-locals)
+     (eval pedz/hatred-set-web-mode-locals)
      (eval pedz/rails-7-passkey-demo-set-web-mode-locals)
      (eval pedz/rails-7-passkey-demo-set-enh-ruby-mode-locals)
      (eval pedz/rails-7-passkey-demo-set-default-mode-locals)

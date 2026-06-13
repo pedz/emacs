@@ -25,12 +25,12 @@ For example when track down where bugs originated from I would often
 be looking at different versions of the same source.  This was before
 the days of ~git~ and ~blame~.
 
-This are new concepts to me so I'm going to explore the details of how
-they work.  I'm going to start with my Hatred project first.  Utopia
-would be to have the classes be things like /rails project using
-docker/ but I've learned it is easier to just do code for the specific
-situation first and then morph the result into more generic concepts
-as other examples are encountered.
+These are new concepts to me so I'm going to explore the details of
+how they work.  I'm going to start with my Hatred project first.
+Utopia would be to have the classes be things like /rails project
+using docker/ but I've learned it is easier to just do code for the
+specific situation first and then morph the result into more generic
+concepts as other examples are encountered.
 
 ** Some low level functions
 
@@ -56,6 +56,11 @@ These routines I assume are not going to be specific to one project.
   (defun pedz/set-one ( var val )
     (set (make-local-variable var) val))
 
+  ;;; I *think* the reason I set variables this way is because I think it adds
+  ;;; a little bit of security.  For example, I can set
+  ;;; org-confirm-babel-evaluate to nil which which is unsafe but it does not
+  ;;; make an entry that it is always safe so if the variable/value pair shows
+  ;;; up some other place, Emacs will ask me to confirm it is ok.
   (defun pedz/set-one-apply ( list )
     (dolist (elt list)
       (pedz/set-one (car elt) (cdr elt))))
@@ -77,7 +82,7 @@ The list of attributes this project current has is:
 - [[https://solargraph.org][Solargraph]]
 - [[http://rspec.info][rspec]]
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (defun pedz/hatred-set-default-mode-locals ()
     "Sets the local variables and modes for the default mode in
   the Hatred project"
@@ -131,7 +136,7 @@ The list of attributes this project current has is:
 This is a project that demonstrates how to do authentication using
 passkeys in a Rails 7 project.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (defun pedz/rails-7-passkey-demo-set-default-mode-locals ()
     "Sets the local variables and modes for the default mode in the
   Rails-7-Passkey-Demo project"
@@ -168,6 +173,80 @@ passkeys in a Rails 7 project.
 
   ;;; and is reference here.
   (dir-locals-set-directory-class "~/Source/rails-7-passkey-demo" 'rails-7-passkey-demo)
+#+end_src
+
+** Canon-EOS-Documentation-Project
+
+This is a project of providing supplemental documentation to Canon EOS
+cameras.  It is mostly an Org project.
+
+#+begin_src emacs-lisp
+  (defun pedz/canon-eos-doc-org-mode-locals ()
+    "Sets the local variables and modes for the Org mode variables in the Canon
+         EOS Documentation project"
+    (message "pedz/canon-eos-doc-org-mode-locals called")
+    (pedz/set-one-apply
+     '(
+       (org-html-head . "<style>
+  img.print_icon {
+      margin: 2px 2px -2px 2px;
+  }
+
+  span.icon::before {
+      content: \"\\03c\";
+  }
+
+  span.icon::after {
+      content: \"\\03e\";
+  }
+
+  kbd {
+      display:          inline-block;
+      margin:           0 .1em;
+      padding:          .1em .6em;
+      font-family:      -apple-system,BlinkMacSystemFont,\"Segoe UI Adjusted\",\"Segoe UI\",\"Liberation Sans\",sans-serif;
+      font-size:        11px;
+      line-height:      1.5;
+      color:            hsl(210,8%,15%);
+      text-shadow:      0 1px 0 hsl(0,0%,100%);
+      background-color: hsl(210,8%,90%);
+      border:           1px solid hsl(210,8%,65%);
+      border-radius:    3px;
+      box-shadow:       0 1px 1px hsla(210, 8%, 5%, 0.15), inset 0 1px 0 0 hsl(0, 0%, 100%);
+      overflow-wrap:    break-word;
+  }
+
+  dt {
+      float:      left;
+      width:      30%;
+      text-align: right;
+      padding:    .25em;
+      clear:      left;
+  }
+
+  dd {
+      float:   left;
+      width:   60%;
+      padding: .25em 0;
+  }
+
+  dl:after {
+      content: \"\";
+      display: table;
+      clear:   both;
+  }
+    </style>
+  ")
+       (org-babel-inline-result-wrap . "%s")
+       (org-confirm-babel-evaluate . nil))))
+
+      (dir-locals-set-class-variables
+       'canon-eos-doc-variables
+       '((org-mode . ((eval . (pedz/canon-eos-doc-org-mode-locals))))))
+
+      ;;; and is reference here.
+      (dir-locals-set-directory-class "~/Source/Canon-EOS-Documentation-Project" 'canon-eos-doc-variables)
+
 #+end_src
 
 * Provide project-setups

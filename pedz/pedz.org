@@ -482,6 +482,15 @@ result in attractive description lists.
     
 #+end_src
 
+*** Org-roam
+Org-roam I hope will help me with all my notes and keep track of the
+time I spend on various projects.
+
+#+begin_src emacs-lisp
+  (leaf org-roam
+    :config (org-roam-db-autosync-mode))
+#+end_src
+
 ** Eglot
 
 This is still new.  As I'm writing this, I got eglot to work last

@@ -156,6 +156,9 @@
 	path = lib/markdown-mode
 	url = git@github.com:jrblevin/markdown-mode.git
 	ignore = untracked
+[submodule "org-roam"]
+	path = lib/org-roam
+	url = https://github.com/org-roam/org-roam
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
